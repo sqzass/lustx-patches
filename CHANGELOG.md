@@ -1,3 +1,26 @@
+## [1.16.0](https://github.com/sqzass/lustx-patches/compare/v1.15.0...v1.16.0) (2026-11-15)
+
+### ✨ New Features
+
+* add a ktlintCheck command to ci.sh. unrelated to builds - github doesnt use it and i only use it locally before pushing (when i can remember to). ([aba5790](https://github.com/sqzass/lustx-patches/commit/aba579040a1de2d56c42b013b09ad630b129c79e))
+* add a linter for kt. mighve messed up the release.yml, so this push will see though ([43cec3d](https://github.com/sqzass/lustx-patches/commit/43cec3d7bee149a04911ce9f0abb3f77c359ca4f))
+* add allow text selection patch ([5c50d69](https://github.com/sqzass/lustx-patches/commit/5c50d690c02cd6c0dd734c3d531ad41d0b95fd07))
+* add bypass forced update patch ([6305424](https://github.com/sqzass/lustx-patches/commit/6305424b4267fc3d8b2bdc0ae2d7309e41575256))
+* add change version code and name patch ([f3517dd](https://github.com/sqzass/lustx-patches/commit/f3517dd9c20de11d684de123b3f17c77bd6fae8f))
+* add remove 'rate us' popup patch ([176fda3](https://github.com/sqzass/lustx-patches/commit/176fda3496fc7c721c23622c8360479abf66ebe5))
+* add rename app patch ([7f69791](https://github.com/sqzass/lustx-patches/commit/7f69791c716cfc5ba014a9371851df4e6d0c0433))
+
+### 🐛 Bug Fixes
+
+* (maybe) failure to build. ([def3fab](https://github.com/sqzass/lustx-patches/commit/def3fab581d9afbab0e73bd6d9abcfdfd110f100))
+* add back in lint (trust) ([a35c186](https://github.com/sqzass/lustx-patches/commit/a35c1862f478856e39f77f9ed1f182924d7eb281))
+* added imports, fixed renamed package name, and also fixed code... maybe. ([0d28175](https://github.com/sqzass/lustx-patches/commit/0d2817567cfca391e97f5c925d915da97a0011b3))
+* **deps:** resync package-lock and use compatible conventional-changelog-writer ([5451e64](https://github.com/sqzass/lustx-patches/commit/5451e6427fa8cbf5ea9ebf1e35c9b124feef6ca4))
+* formatting ([f4e4152](https://github.com/sqzass/lustx-patches/commit/f4e4152ddfa54f7c8354f753bfcbcc102a6e100c))
+* package.json and package-lock.json so they match, SHOULD fix failing builds. as for release.yml, removed FCM - that's morphe, i dont have any push notifications ([1814d80](https://github.com/sqzass/lustx-patches/commit/1814d806551e37e90ecc34b6d5fc81e13db8c9b7))
+* releases ([77d0ef7](https://github.com/sqzass/lustx-patches/commit/77d0ef72c95131700669d709ca54c3ba8d77d801))
+* remove lint. it's giving me a headache. ([8844450](https://github.com/sqzass/lustx-patches/commit/8844450160369d43a41455e34df37dd3ebb9a1b9))
+
 ## [1.15.0](https://github.com/sqzass/lustx-patches/compare/v1.14.0...v1.15.0) (2026-11-14)
 
 ### ✨ New Features

@@ -30,8 +30,8 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.15.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.15.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;13 patches total
-<details open>
+> **[v1.16.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.16.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;23 patches total
+<details>
 <summary>📦 Pawxy - Fast VPN & Web Browser&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
 
@@ -46,23 +46,33 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 
 </details>
 
-<details open>
-<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;12 patches</summary>
+<details>
+<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;22 patches</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Allow screen recording](#allow-screen-recording) | Clears FLAG_SECURE and disables secure surfaces so the app can be screen-recorded. |  |
 | [Allow screenshots](#allow-screenshots) | Clears FLAG_SECURE from window flags so the app can be captured in screenshots. |  |
+| [Allow text selection](#allow-text-selection) | Flips setTextIsSelectable(false)/setLongClickable(false) to true so text can be selected and copied. |  |
 | [Change package name](#change-package-name) | Renames the app package (appends ".lustx" by default) and updates custom permissions and content-provider authorities. Changing the package name can break apps that hardcode their package or authorities in code. | • Package name<br>• Update permissions<br>• Update provider authorities |
+| [Change version name / code](#change-version-name-code) | Rewrites the manifest versionName/versionCode and the baked-in BuildConfig values. 'Current' keeps the existing value. | • Version name<br>• Version code |
 | [Custom font](#custom-font) | Overrides the app's typeface with a built-in font family. Affects explicit Typeface usage; views that never set a typeface keep the system default. | • Font family |
 | [Disable boot start-up](#disable-boot-start-up) | Prevents the app from auto-starting on device boot by removing boot intent-filter actions and the RECEIVE_BOOT_COMPLETED permission. | • Also block update start-up |
+| [Force dark / AMOLED theme](#force-dark-amoled-theme) | Forces AppCompat night mode to YES and (optionally) flips AMOLED/pure-black flags. Covers AppCompat/Material apps; Jetpack Compose themes are not affected. | • Enable AMOLED / pure-black |
+| [Forced-update bypass](#forced-update-bypass) | Neuters in-app forced-update gates (dialogs, blocking checks, version prompts). Works on apps that keep readable method names; fully-obfuscated apps need per-app fingerprints. |  |
 | [Hide app icon](#hide-app-icon) | Hides the app from the launcher by replacing the LAUNCHER category with DEFAULT. The app stays installed; launch it via another app or a shortcut. |  |
 | [Remove PairIP](#remove-pairip) | Removes the PairIP Play licensing gate (startup license check, response validation, repeated checks and paywall/kill path). Does not bypass PairIP native virtualization or Play Integrity attestation. |  |
+| [Remove rate-us / review prompts](#remove-rate-us-review-prompts) | Suppresses in-app rating/review dialogs and gates. Optionally blocks the Play Core system review dialog (may crash apps that don't null-check the returned Task). | • Block Play Core review dialog |
+| [Rename app label](#rename-app-label) | Sets a literal launcher name on <application>, launcher activities and aliases. 'Current' keeps the existing label. | • App label |
+| [Skip splash](#skip-splash) | Skips splash/intro screens by running their deferred navigation immediately and removing artificial sleeps. Scoped to splash-named Activity/Fragment classes. | • Convert splash delays to immediate |
+| [Spoof Android ID](#spoof-android-id) | Returns a fake value for Settings.Secure 'android_id' reads. | • Android ID |
+| [Spoof SIM country / operator](#spoof-sim-country-operator) | Fakes TelephonyManager / SubscriptionInfo country + operator values. | • SIM preset |
 | [Spoof device information](#spoof-device-information) | Replaces android.os.Build device identity fields with a chosen device preset. | • Device preset<br>• Also spoof OS version |
 | [Spoof install source](#spoof-install-source) | Makes the app believe it was installed from a chosen store (Play Store by default). | • Install source |
 | [Strip VPN checks](#strip-vpn-checks) | Hides an active VPN from the app by neutralizing NetworkCapabilities transport/capability checks and (optionally) network-interface name checks. | • Also strip interface-name checks |
 | [Strip sensitive permissions](#strip-sensitive-permissions) | Removes selected sensitive permissions from the manifest. Can break features that rely on them; enable only the groups you want stripped. | • Location<br>• Contacts & accounts<br>• SMS & call log<br>• Phone<br>• Camera & microphone<br>• Storage / media<br>• Sensors & activity<br>• Calendar<br>• Nearby devices<br>• Notifications |
+| [Telemetry / crash-reporter kill](#telemetry-crash-reporter-kill) | Silences analytics, crash-reporting and telemetry SDKs (Firebase, Sentry, Adjust, Mixpanel, Amplitude, Segment, AppMetrica, Bugly, ACRA, etc.). | • Also kill SDK initialization |
 | [Universal cleanup](#universal-cleanup) | Removes junk metadata files and (optionally) strips debug logging calls. | • Strip debug logging<br>• Remove Kotlin module metadata |
 
 </details>
