@@ -55,7 +55,7 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 | [Allow screen recording](#allow-screen-recording) | Clears FLAG_SECURE and disables secure surfaces so the app can be screen-recorded. |  |
 | [Allow screenshots](#allow-screenshots) | Clears FLAG_SECURE from window flags so the app can be captured in screenshots. |  |
 | [Allow text selection](#allow-text-selection) | Flips setTextIsSelectable(false)/setLongClickable(false) to true so text can be selected and copied. |  |
-| [Bypass root / emulator detection](#bypass-root-emulator-detection) | Forces common root and emulator detection methods to report clean. Covers Java/Kotlin-level checks; native (.so) detection is not affected. |  |
+| [Bypass root / emulator detection](#bypass-root-emulator-detection) | Forces common root and emulator detection methods to report clean. Covers Java/Kotlin-level checks in app code; library packages and native (.so) detection are not affected. |  |
 | [Change package name](#change-package-name) | Renames the app package (appends ".lustx" by default) and updates custom permissions and content-provider authorities. Changing the package name can break apps that hardcode their package or authorities in code. | • Package name<br>• Update permissions<br>• Update provider authorities |
 | [Change version name / code](#change-version-name-code) | Rewrites the manifest versionName/versionCode and the baked-in BuildConfig values. 'Current' keeps the existing value. | • Version name<br>• Version code |
 | [Custom font](#custom-font) | Overrides the app's typeface with a built-in font family. Affects explicit Typeface usage; views that never set a typeface keep the system default. | • Font family |

@@ -28,7 +28,7 @@
     },
     {
       "name": "Bypass root / emulator detection",
-      "description": "Forces common root and emulator detection methods to report clean. Covers Java/Kotlin-level checks; native (.so) detection is not affected.",
+      "description": "Forces common root and emulator detection methods to report clean. Covers Java/Kotlin-level checks in app code; library packages and native (.so) detection are not affected.",
       "default": false,
       "category": null,
       "compatiblePackages": null,
