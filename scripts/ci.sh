@@ -2,7 +2,15 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-./gradlew :patches:generatePatchesList
+fix=false
+[[ "${1:-}" == "--fix" ]] && fix=true
+
+if $fix; then
+  ./gradlew :patches:ktlintFormat
+fi
+
+./gradlew :patches:ktlintCheck
+./gradlew :patches:generatePatchesList :patches:buildAndroid
 
 python3 - <<'PY'
 import json
@@ -12,5 +20,3 @@ print("apps:", sorted({c["name"] for p in d["patches"] for c in (p.get("compatib
 PY
 
 python3 .github/scripts/generate_patches_readme.py sqzass/lustx-patches dev patches-list.json README.md
-
-./gradlew :patches:buildAndroid

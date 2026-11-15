@@ -29,7 +29,11 @@ private val SPLASH_CLASS_RE = Regex("(splash|launch|welcome|intro|brand|boot)", 
 
 private fun argRegisters(ins: Instruction): List<Int>? = when (ins) {
     is FiveRegisterInstruction -> listOf(
-        ins.registerC, ins.registerD, ins.registerE, ins.registerF, ins.registerG,
+        ins.registerC,
+        ins.registerD,
+        ins.registerE,
+        ins.registerF,
+        ins.registerG,
     ).take(ins.registerCount)
     is RegisterRangeInstruction -> (ins.startRegister until ins.startRegister + ins.registerCount).toList()
     else -> null
@@ -97,7 +101,8 @@ val skipSplashPatch = bytecodePatch(
     default = false,
 ) {
     val convertDelays by booleanOption(
-        key = "convertDelays", default = true,
+        key = "convertDelays",
+        default = true,
         title = "Convert splash delays to immediate",
         description = "Replaces postDelayed/sleep inside splash classes with immediate execution. " +
             "If a splash blanks or hangs, disable this.",
