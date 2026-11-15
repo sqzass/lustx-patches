@@ -1,3 +1,11 @@
+## [1.18.1](https://github.com/sqzass/lustx-patches/compare/v1.18.0...v1.18.1) (2026-11-15)
+
+### 🐛 Bug Fixes
+
+* **Pawxy:** added back missing brace i deleted on accident ([ed58e4b](https://github.com/sqzass/lustx-patches/commit/ed58e4b0be1d137753b2c756ac424ae38e4f5029))
+* **Pawxy:** fix premium patch so it doesn't cause clicks to no-op ( menus can now be used </3 ) ([50b612f](https://github.com/sqzass/lustx-patches/commit/50b612f53dbf0e3475a5ba38d9343e36ea4c8a7d))
+* **SpoofDeviceIdentityPatch.kt:** remove `tags`, `type`, `user`, and `host` from spoof. this helps with the `Spoof Root Environment` patch without actually compromising anything. ([47c969c](https://github.com/sqzass/lustx-patches/commit/47c969c2453a36a4763bad907b7bc99c451c9471))
+
 ## [1.18.0](https://github.com/sqzass/lustx-patches/compare/v1.17.4...v1.18.0) (2026-11-15)
 
 ### ✨ New Features
