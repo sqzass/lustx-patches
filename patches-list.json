@@ -27,6 +27,14 @@
       "options": []
     },
     {
+      "name": "Bypass root / emulator detection",
+      "description": "Forces common root and emulator detection methods to report clean. Covers Java/Kotlin-level checks; native (.so) detection is not affected.",
+      "default": false,
+      "category": null,
+      "compatiblePackages": null,
+      "options": []
+    },
+    {
       "name": "Change package name",
       "description": "Renames the app package (appends \".lustx\" by default) and updates custom permissions and content-provider authorities. Changing the package name can break apps that hardcode their package or authorities in code.",
       "default": false,
@@ -234,70 +242,6 @@
       ]
     },
     {
-      "name": "Spoof Android ID",
-      "description": "Returns a fake value for Settings.Secure 'android_id' reads.",
-      "default": false,
-      "category": null,
-      "compatiblePackages": null,
-      "options": [
-        {
-          "key": "androidId",
-          "title": "Android ID",
-          "description": "16 hex chars, or 'Random' to generate one per build.",
-          "required": true,
-          "type": "kotlin.String",
-          "default": "Random",
-          "values": {
-            "Random": "Random"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Spoof SIM country / operator",
-      "description": "Fakes TelephonyManager / SubscriptionInfo country + operator values.",
-      "default": false,
-      "category": null,
-      "compatiblePackages": null,
-      "options": [
-        {
-          "key": "preset",
-          "title": "SIM preset",
-          "description": "The simulated SIM/network identity.",
-          "required": true,
-          "type": "kotlin.String",
-          "default": "US - T-Mobile",
-          "values": {
-            "Keep current (no spoof)": "Keep current (no spoof)",
-            "US - T-Mobile": "US - T-Mobile",
-            "US - AT&T": "US - AT&T",
-            "US - Verizon": "US - Verizon",
-            "UK - EE": "UK - EE",
-            "UK - Vodafone": "UK - Vodafone",
-            "UK - O2": "UK - O2",
-            "DE - Telekom": "DE - Telekom",
-            "DE - Vodafone": "DE - Vodafone",
-            "FR - Orange": "FR - Orange",
-            "FR - SFR": "FR - SFR",
-            "ES - Movistar": "ES - Movistar",
-            "IT - TIM": "IT - TIM",
-            "NL - KPN": "NL - KPN",
-            "PL - Orange": "PL - Orange",
-            "BR - Vivo": "BR - Vivo",
-            "IN - Jio": "IN - Jio",
-            "IN - Airtel": "IN - Airtel",
-            "JP - docomo": "JP - docomo",
-            "KR - SK Telecom": "KR - SK Telecom",
-            "AU - Telstra": "AU - Telstra",
-            "CA - Rogers": "CA - Rogers",
-            "SG - StarHub": "SG - StarHub",
-            "AE - etisalat": "AE - etisalat",
-            "TR - Turkcell": "TR - Turkcell"
-          }
-        }
-      ]
-    },
-    {
       "name": "Spoof device information",
       "description": "Replaces android.os.Build device identity fields with a chosen device preset.",
       "default": false,
@@ -378,6 +322,24 @@
             "Xiaomi GetApps": "com.xiaomi.market",
             "ADB / sideload": "com.android.shell"
           }
+        }
+      ]
+    },
+    {
+      "name": "Spoof rooted environment",
+      "description": "Makes Java-level root checks report rooted: forces detection methods to return true and overrides Build.TAGS/USER/HOST. For testing bypass patches (e.g. PortDroid). Native detection is not affected.",
+      "default": false,
+      "category": null,
+      "compatiblePackages": null,
+      "options": [
+        {
+          "key": "spoofBuild",
+          "title": "Override Build fields",
+          "description": "Sets TAGS=test-keys, USER=root, HOST=buildbot in Build.<clinit>.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": true,
+          "values": null
         }
       ]
     },

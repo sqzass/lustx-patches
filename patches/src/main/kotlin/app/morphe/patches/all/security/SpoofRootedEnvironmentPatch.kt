@@ -10,12 +10,11 @@ import app.morphe.patcher.patch.mutableClassDefBy
 import app.morphe.patcher.patch.mutableClassDefByOrNull
 import app.morphe.patcher.util.findMutableMethodOf
 import app.morphe.patcher.util.getReference
-import app.morphe.patcher.util.returnEarly
 import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
+import app.morphe.patcher.util.returnEarly
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.ClassDef
-import com.android.tools.smali.dexlib2.iface.Method
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
@@ -94,7 +93,8 @@ val spoofRootedEnvironmentPatch = bytecodePatch(
     default = false,
 ) {
     val spoofBuild by booleanOption(
-        key = "spoofBuild", default = true,
+        key = "spoofBuild",
+        default = true,
         title = "Override Build fields",
         description = "Sets TAGS=test-keys, USER=root, HOST=buildbot in Build.<clinit>.",
     )
