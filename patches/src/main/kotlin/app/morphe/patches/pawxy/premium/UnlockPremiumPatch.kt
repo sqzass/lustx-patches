@@ -6,7 +6,6 @@
 
 package app.morphe.patches.pawxy.premium
 
-import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
 import app.morphe.patcher.patch.ApkFileType
 import app.morphe.patcher.patch.AppTarget
@@ -33,10 +32,7 @@ val unlockPremiumPatch = bytecodePatch(
     )
 
     execute {
-        // 0. Force the central entitlement check true. This is what actually
-        //    gates g1, VPN servers, and all premium features.
         PremiumEntitlementFingerprint.matchSingle().method.returnEarly(true)
-        // 1. Force getState() → SUBSCRIBED for anything reading the enum directly.
         SubscribeStateGetStateFingerprint.matchSingle().method.addInstructions(
             0,
             """
@@ -45,3 +41,4 @@ val unlockPremiumPatch = bytecodePatch(
             """.trimIndent(),
         )
     }
+}
