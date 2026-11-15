@@ -1,3 +1,15 @@
+## [1.17.0](https://github.com/sqzass/lustx-patches/compare/v1.16.0...v1.17.0) (2026-11-15)
+
+### ✨ New Features
+
+* add a bypass root emulator patch ([6b6277f](https://github.com/sqzass/lustx-patches/commit/6b6277f2d2e9d66de89f7f8397107bb2572aada9))
+* add a fake/spoof rooted environment ([a0ca680](https://github.com/sqzass/lustx-patches/commit/a0ca680e77ad233375b402dd4dcfc37c63202f3b))
+* add a unified 'spoof device identity' patch instead of having split files for things like devices, mac, android id, etc. ([faad53f](https://github.com/sqzass/lustx-patches/commit/faad53f415153b8b124f6c3171515111c0cbc671))
+
+### 🐛 Bug Fixes
+
+* **SpoofDeviceIdenitiyPatch.kt:** i dont know ([9b3e61f](https://github.com/sqzass/lustx-patches/commit/9b3e61f641ac22df94ec934aa2f9a15225735221))
+
 ## [1.16.0](https://github.com/sqzass/lustx-patches/compare/v1.15.0...v1.16.0) (2026-11-15)
 
 ### ✨ New Features
