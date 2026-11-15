@@ -13,6 +13,7 @@ import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.util.matchSingle
+import app.morphe.patcher.util.returnEarly
 
 @Suppress("unused")
 val unlockPremiumPatch = bytecodePatch(
@@ -32,6 +33,12 @@ val unlockPremiumPatch = bytecodePatch(
     )
 
     execute {
+        // 0. Force the central entitlement check true. This is what actually
+        //    gates g1, VPN servers, and all premium features. The getState
+        //    patch below is kept as belt-and-suspenders for anything that
+        //    reads the state enum directly.
+        PremiumEntitlementFingerprint.matchSingle().method.returnEarly(true)
+
         // 1. Patch Subscribe$State.getState() to always return SUBSCRIBED.
         //    This is the central dispatch for premium state — every premium gate
         //    (VPN servers, upsell badges, paywall) reads this value.

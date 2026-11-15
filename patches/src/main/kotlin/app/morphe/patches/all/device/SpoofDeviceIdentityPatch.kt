@@ -14,6 +14,7 @@ import app.morphe.patcher.util.getReference
 import app.morphe.patcher.util.matchAllMethodIndicesForEach
 import app.morphe.patcher.util.proxy.mutableTypes.MutableClass
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
+import app.morphe.patches.all.shared.isControlFlow
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.Method
@@ -23,7 +24,6 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
-import com.android.tools.smali.dexlib2.iface.reference.StringReference
 import kotlin.random.Random
 
 private val LIB_PREFIXES = listOf(
@@ -267,19 +267,7 @@ private fun MutableMethod.isAndroidIdArg(
         val ins = getInstruction(j)
         val op = ins.opcode
 
-        if (ins is OneRegisterInstruction && ins.registerA == reg) {
-            if (op == Opcode.CONST_STRING || op == Opcode.CONST_STRING_JUMBO) {
-                return ins.getReference<StringReference>()?.string == "android_id"
-            }
-
-            if (op == Opcode.SGET_OBJECT) {
-                val f = ins.getReference<FieldReference>()
-                return f?.definingClass == "Landroid/provider/Settings\$Secure;" &&
-                    f.name == "ANDROID_ID"
-            }
-
-            return false
-        }
+        if (isControlFlow(op)) return false
 
         if (
             op == Opcode.GOTO ||
