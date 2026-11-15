@@ -30,7 +30,7 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.17.3](https://github.com/sqzass/lustx-patches/releases/tag/v1.17.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;23 patches total
+> **[v1.17.1](https://github.com/sqzass/lustx-patches/releases/tag/v1.17.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;23 patches total
 <details>
 <summary>📦 Pawxy - Fast VPN & Web Browser&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
@@ -67,9 +67,9 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 | [Remove rate-us / review prompts](#remove-rate-us-review-prompts) | Suppresses in-app rating/review dialogs and gates. Optionally blocks the Play Core system review dialog (may crash apps that don't null-check the returned Task). | • Block Play Core review dialog |
 | [Rename app label](#rename-app-label) | Sets a literal launcher name on <application>, launcher activities and aliases. 'Current' keeps the existing label. | • App label |
 | [Skip splash](#skip-splash) | Skips splash/intro screens by running their deferred navigation immediately and removing artificial sleeps. Scoped to splash-named Activity/Fragment classes. | • Convert splash delays to immediate |
-| [Spoof device identity](#spoof-device-identity) | Unified device spoofing with per-category toggles: Android ID, MAC address, SIM/carrier, and Build device fields. Includes emulator presets. Replaces the former individual SpoofAndroidId, SpoofSim, and SpoofDevice patches. | • Spoof Android ID<br>• Android ID value<br>• Spoof MAC address<br>• MAC address value<br>• Spoof SIM / carrier<br>• SIM preset<br>• Spoof device / Build fields<br>• Device preset<br>• Also spoof OS version |
+| [Spoof device identity](#spoof-device-identity) | Unified device spoofing with per-category toggles: Android ID, MAC address, SIM/carrier, and Build device fields. Includes emulator presets. Library packages keep the real device so their internal behavior is unaffected. | • Spoof Android ID<br>• Android ID value<br>• Spoof MAC address<br>• MAC address value<br>• Spoof SIM / carrier<br>• SIM preset<br>• Spoof device / Build fields<br>• Device preset<br>• Also spoof OS version |
 | [Spoof install source](#spoof-install-source) | Makes the app believe it was installed from a chosen store (Play Store by default). | • Install source |
-| [Spoof rooted environment](#spoof-rooted-environment) | Makes Java-level root checks report rooted: forces detection methods to return true and overrides Build.TAGS/USER/HOST. For testing bypass patches (e.g. PortDroid). Native detection is not affected. | • Override Build fields |
+| [Spoof rooted environment](#spoof-rooted-environment) | Makes Java-level root checks report rooted: forces named detection methods true, spoofs Build.TAGS/USER/HOST at read sites, and forces su-path file checks to succeed. String/field-based targeting survives obfuscation. Native checks and Runtime.exec("su") are not faked. | • Spoof Build fields |
 | [Strip VPN checks](#strip-vpn-checks) | Hides an active VPN from the app by neutralizing NetworkCapabilities transport/capability checks and (optionally) network-interface name checks. | • Also strip interface-name checks |
 | [Strip sensitive permissions](#strip-sensitive-permissions) | Removes selected sensitive permissions from the manifest. Can break features that rely on them; enable only the groups you want stripped. | • Location<br>• Contacts & accounts<br>• SMS & call log<br>• Phone<br>• Camera & microphone<br>• Storage / media<br>• Sensors & activity<br>• Calendar<br>• Nearby devices<br>• Notifications |
 | [Telemetry / crash-reporter kill](#telemetry-crash-reporter-kill) | Silences analytics, crash-reporting and telemetry SDKs (Firebase, Sentry, Adjust, Mixpanel, Amplitude, Segment, AppMetrica, Bugly, ACRA, etc.). | • Also kill SDK initialization |
