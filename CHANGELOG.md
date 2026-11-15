@@ -1,3 +1,11 @@
+## [1.17.4](https://github.com/sqzass/lustx-patches/compare/v1.17.3...v1.17.4) (2026-11-15)
+
+### 🐛 Bug Fixes
+
+* **decompile.py:** let JADX run (previously had permission issues) ([575709b](https://github.com/sqzass/lustx-patches/commit/575709b84f126beffec975ea28a0bca23e7802ee))
+* **SpoofDeviceIdentityPatch.kt:** libraries keep the REAL device, leading to no crashes (hopefully). does not compromise the true nature of spoofing. ([7165732](https://github.com/sqzass/lustx-patches/commit/7165732ea2e30b3b7c73bb0d185826c0cd7b24a1))
+* **SpoofRootedEnvironmentPatch.kt:** add fixes to the spoof rooted, more patches soon ([f546412](https://github.com/sqzass/lustx-patches/commit/f5464125fbae5646b2ecddece15934767619b819))
+
 ## [1.17.3](https://github.com/sqzass/lustx-patches/compare/v1.17.2...v1.17.3) (2026-11-15)
 
 ### 🐛 Bug Fixes
