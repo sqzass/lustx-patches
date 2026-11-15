@@ -26,6 +26,14 @@ import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 import com.android.tools.smali.dexlib2.iface.reference.StringReference
 import kotlin.random.Random
 
+private val LIB_PREFIXES = listOf(
+    "Landroidx/", "Landroid/", "Lkotlin/", "Lkotlinx/",
+    "Lcom/google/android/", "Lokhttp3/", "Lokio/", "Lretrofit2/",
+    "Lcom/bumptech/", "Lcom/squareup/", "Ljava/", "Ljavax/",
+)
+
+private fun isLibraryClass(type: String) = LIB_PREFIXES.any(type::startsWith)
+
 private class SimPreset(
     val label: String,
     val iso: String,
@@ -454,6 +462,8 @@ private fun processDeviceClass(
     versionStrings: Map<String, String>,
     spoofVersion: Boolean,
 ) {
+    if (isLibraryClass(classDef.type)) return
+
     val hasTarget = classDef.methods.any { method ->
         method.implementation?.instructions?.any { ins ->
             ins.isDeviceTarget(buildStrings, versionStrings, spoofVersion)
@@ -509,8 +519,8 @@ val spoofDeviceIdentityPatch = bytecodePatch(
     name = "Spoof device identity",
     description = "Unified device spoofing with per-category toggles: " +
         "Android ID, MAC address, SIM/carrier, and Build device fields. " +
-        "Includes emulator presets. Replaces the former individual " +
-        "SpoofAndroidId, SpoofSim, and SpoofDevice patches.",
+        "Includes emulator presets. Library packages keep the real device " +
+        "so their internal behavior is unaffected.",
     default = false,
 ) {
     val enableAndroidId by booleanOption(
@@ -587,8 +597,8 @@ val spoofDeviceIdentityPatch = bytecodePatch(
         key = "spoofVersion",
         default = false,
         title = "Also spoof OS version",
-        description = "Also spoof Build.VERSION RELEASE, SDK_INT, SECURITY_PATCH, INCREMENTAL. " +
-            "Can break apps; off by default.",
+        description = "Also spoof Build.VERSION RELEASE, SDK_INT, SECURITY_PATCH, INCREMENTAL " +
+            "in app code. Can break apps; off by default.",
     )
 
     execute {
