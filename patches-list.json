@@ -35,6 +35,38 @@
       "options": []
     },
     {
+      "name": "Bypass signature check",
+      "description": "Forces TamperCheck.validateAppSignature to true. Patched builds are re-signed, so the app's three hardcoded certificate SHA-1 hashes no longer match.",
+      "default": true,
+      "category": null,
+      "compatiblePackages": [
+        {
+          "packageName": "com.stealthcopter.portdroid",
+          "name": "PortDroid - Network Analysis",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "formFactor": "MOBILE",
+          "targets": [
+            {
+              "version": "1.0.7",
+              "versionCodes": {
+                "ARM64_V8A": 113,
+                "ARMEABI_V7A": 113,
+                "X86_64": 113,
+                "X86": 113
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Change package name",
       "description": "Renames the app package (appends \".lustx\" by default) and updates custom permissions and content-provider authorities. Changing the package name can break apps that hardcode their package or authorities in code.",
       "default": false,
