@@ -1,3 +1,10 @@
+## [1.17.3](https://github.com/sqzass/lustx-patches/compare/v1.17.2...v1.17.3) (2026-11-15)
+
+### 🐛 Bug Fixes
+
+* **BypassRootEmulatorPatch.kt:** potentially fix the root emulator bypass patch ([28f3029](https://github.com/sqzass/lustx-patches/commit/28f302990b1d1477b83398bbc7a3c46312e54ae4))
+* **SpoofRootedEnvironmentPatch.kt:** i hate this ([e7b56cc](https://github.com/sqzass/lustx-patches/commit/e7b56cc3aa3cb61f74095133fc71238c413315d9))
+
 ## [1.17.2](https://github.com/sqzass/lustx-patches/compare/v1.17.1...v1.17.2) (2026-11-15)
 
 ### 🐛 Bug Fixes
