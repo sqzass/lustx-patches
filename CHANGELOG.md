@@ -1,3 +1,9 @@
+## [1.19.0](https://github.com/sqzass/lustx-patches/compare/v1.18.1...v1.19.0) (2026-11-15)
+
+### ✨ New Features
+
+* **Pawxy:** adds a new patch that removes the `rate us!` popup or lets you modify the text. ([68fc2bf](https://github.com/sqzass/lustx-patches/commit/68fc2bfee4ec224d7944f27e12f1f5cd50c1707c))
+
 ## [1.18.1](https://github.com/sqzass/lustx-patches/compare/v1.18.0...v1.18.1) (2026-11-15)
 
 ### 🐛 Bug Fixes
