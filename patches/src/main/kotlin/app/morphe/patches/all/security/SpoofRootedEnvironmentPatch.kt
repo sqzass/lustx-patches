@@ -18,39 +18,35 @@ import com.android.tools.smali.dexlib2.iface.ClassDef
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
-private val SU_PATHS = setOf(
-    "/system/bin/su",
-    "/system/xbin/su",
-    "/sbin/su",
-    "/system/su",
-    "/system/bin/.ext/.su",
-    "/system/usr/we-need-root/su-backup",
-    "/data/local/su",
-    "/data/local/bin/su",
-    "/data/local/xbin/su",
-    "/magisk/.core/bin/su",
-    "/data/adb/magisk/su",
-    "/dev/.magisk.unblock",
-)
-
 private val ROOT_RE = Regex(
     "^(is|has|check|detect|verify|test|find|look|scan)" +
-        ".*(root|su|magisk|kernelsu|supersu|superuser)" +
-        ".*(ed|ing|s)?$",
+        ".*(root|magisk|superuser|supersu|kernelsu)",
     RegexOption.IGNORE_CASE,
 )
 
+private val SU_RE = Regex(
+    "^(is|has|check|detect|verify|test|find|look|scan).*Su(?![a-z])",
+)
+
+private val LIB_PREFIXES = listOf(
+    "Landroidx/", "Landroid/", "Lkotlin/", "Lkotlinx/",
+    "Lcom/google/android/", "Lokhttp3/", "Lokio/", "Lretrofit2/",
+    "Lcom/bumptech/", "Lcom/squareup/", "Ljava/", "Ljavax/",
+)
+
+private fun isLibraryClass(type: String) = LIB_PREFIXES.any(type::startsWith)
+
 private fun forceRootMethods(classDef: ClassDef) {
+    if (isLibraryClass(classDef.type)) return
+
     val targets = classDef.methods.filter { m ->
         m.implementation != null &&
             m.returnType == "Z" &&
-            ROOT_RE.matches(m.name)
+            (ROOT_RE.matches(m.name) || SU_RE.matches(m.name))
     }
-
     if (targets.isEmpty()) return
 
     val mc = mutableClassDefBy(classDef)
-
     targets.forEach { m ->
         mc.findMutableMethodOf(m).returnEarly(true)
     }
