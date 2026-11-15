@@ -1,3 +1,14 @@
+## [1.18.0](https://github.com/sqzass/lustx-patches/compare/v1.17.4...v1.18.0) (2026-11-15)
+
+### ✨ New Features
+
+* add `bypass tamper check` patch to PortDroid ([6b34cb5](https://github.com/sqzass/lustx-patches/commit/6b34cb54d77b57206162c8afd7d106be0e5cda2a))
+* most likely fixed Pawxy's erroring premium patch ([e4d88aa](https://github.com/sqzass/lustx-patches/commit/e4d88aa5df8c609786cfb72f08bee3c35983e678))
+
+### 🐛 Bug Fixes
+
+* seven patches that now use a shared helper plus lint fixes ([690a51b](https://github.com/sqzass/lustx-patches/commit/690a51b05152e9fca09494aa4802f3ba64b50676))
+
 ## [1.17.4](https://github.com/sqzass/lustx-patches/compare/v1.17.3...v1.17.4) (2026-11-15)
 
 ### 🐛 Bug Fixes
