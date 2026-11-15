@@ -30,7 +30,7 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.18.1](https://github.com/sqzass/lustx-patches/releases/tag/v1.18.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;24 patches total
+> **[v1.18.1](https://github.com/sqzass/lustx-patches/releases/tag/v1.18.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;25 patches total
 <details>
 <summary>📦 PortDroid - Network Analysis&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
@@ -62,7 +62,7 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 </details>
 
 <details>
-<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;22 patches</summary>
+<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;23 patches</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
@@ -78,6 +78,7 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 | [Force dark / AMOLED theme](#force-dark-amoled-theme) | Forces AppCompat night mode to YES and (optionally) flips AMOLED/pure-black flags. Covers AppCompat/Material apps; Jetpack Compose themes are not affected. | • Enable AMOLED / pure-black |
 | [Forced-update bypass](#forced-update-bypass) | Neuters in-app forced-update gates (dialogs, blocking checks, version prompts). Works on apps that keep readable method names; fully-obfuscated apps need per-app fingerprints. |  |
 | [Hide app icon](#hide-app-icon) | Hides the app from the launcher by replacing the LAUNCHER category with DEFAULT. The app stays installed; launch it via another app or a shortcut. |  |
+| [Rate-us popup](#rate-us-popup) | Either removes the rate-us popup entirely, or rewrites its text. Rewrite mode changes the dialog title/body/buttons. Remove mode kills the trigger so the popup never appears. | • Remove popup entirely<br>• Dialog title<br>• Dialog body<br>• Confirm button |
 | [Remove PairIP](#remove-pairip) | Removes the PairIP Play licensing gate (startup license check, response validation, repeated checks and paywall/kill path). Does not bypass PairIP native virtualization or Play Integrity attestation. |  |
 | [Remove rate-us / review prompts](#remove-rate-us-review-prompts) | Suppresses in-app rating/review dialogs and gates. Optionally blocks the Play Core system review dialog (may crash apps that don't null-check the returned Task). | • Block Play Core review dialog |
 | [Rename app label](#rename-app-label) | Sets a literal launcher name on <application>, launcher activities and aliases. 'Current' keeps the existing label. | • App label |
