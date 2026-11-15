@@ -1,3 +1,10 @@
+## [1.17.2](https://github.com/sqzass/lustx-patches/compare/v1.17.1...v1.17.2) (2026-11-15)
+
+### 🐛 Bug Fixes
+
+* **BypassrootEmulatorPatch.kt:** fix patching probably ([bca0514](https://github.com/sqzass/lustx-patches/commit/bca05141fc38332c94d10dd64b9bb0c81fff54b5))
+* **SpoofRootedEnvironmentPatch.kt:** potentially fix patching error. ([40c613b](https://github.com/sqzass/lustx-patches/commit/40c613b1f98d3b18c7897b3d8629194e6a7f8057))
+
 ## [1.17.1](https://github.com/sqzass/lustx-patches/compare/v1.17.0...v1.17.1) (2026-11-15)
 
 ### 🐛 Bug Fixes
