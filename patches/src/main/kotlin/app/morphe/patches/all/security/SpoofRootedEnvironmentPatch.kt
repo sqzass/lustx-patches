@@ -42,10 +42,15 @@ private val ROOT_RE = Regex(
 
 private fun forceRootMethods(classDef: ClassDef) {
     val targets = classDef.methods.filter { m ->
-        m.returnType == "Z" && ROOT_RE.matches(m.name)
+        m.implementation != null &&
+            m.returnType == "Z" &&
+            ROOT_RE.matches(m.name)
     }
+
     if (targets.isEmpty()) return
+
     val mc = mutableClassDefBy(classDef)
+
     targets.forEach { m ->
         mc.findMutableMethodOf(m).returnEarly(true)
     }
