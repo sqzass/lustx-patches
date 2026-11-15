@@ -484,10 +484,6 @@ private fun spoofDevice(
         "ID" to p.id,
         "BOOTLOADER" to p.bootloader,
         "RADIO" to p.radio,
-        "TAGS" to p.tags,
-        "TYPE" to p.type,
-        "USER" to p.user,
-        "HOST" to p.host,
     )
 
     val versionStrings = mapOf(
