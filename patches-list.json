@@ -242,17 +242,109 @@
       ]
     },
     {
-      "name": "Spoof device information",
-      "description": "Replaces android.os.Build device identity fields with a chosen device preset.",
+      "name": "Spoof device identity",
+      "description": "Unified device spoofing with per-category toggles: Android ID, MAC address, SIM/carrier, and Build device fields. Includes emulator presets. Replaces the former individual SpoofAndroidId, SpoofSim, and SpoofDevice patches.",
       "default": false,
       "category": null,
       "compatiblePackages": null,
       "options": [
         {
-          "key": "device",
+          "key": "enableAndroidId",
+          "title": "Spoof Android ID",
+          "description": "Overrides Settings.Secure 'android_id' reads.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        },
+        {
+          "key": "androidIdValue",
+          "title": "Android ID value",
+          "description": "16 hex chars, or 'Random' to generate one per build.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "Random",
+          "values": {
+            "Random": "Random"
+          }
+        },
+        {
+          "key": "enableMac",
+          "title": "Spoof MAC address",
+          "description": "Overrides WifiInfo.getMacAddress() and BluetoothAdapter.getAddress().",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        },
+        {
+          "key": "macValue",
+          "title": "MAC address value",
+          "description": "Format AA:BB:CC:DD:EE:FF, or 'Random'.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "Random",
+          "values": {
+            "Random": "Random"
+          }
+        },
+        {
+          "key": "enableSim",
+          "title": "Spoof SIM / carrier",
+          "description": "Overrides TelephonyManager and SubscriptionInfo country/operator getters.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        },
+        {
+          "key": "simPreset",
+          "title": "SIM preset",
+          "description": "The simulated SIM/network identity.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "US - T-Mobile",
+          "values": {
+            "US - T-Mobile": "US - T-Mobile",
+            "US - AT&T": "US - AT&T",
+            "US - Verizon": "US - Verizon",
+            "UK - EE": "UK - EE",
+            "UK - Vodafone": "UK - Vodafone",
+            "UK - O2": "UK - O2",
+            "DE - Telekom": "DE - Telekom",
+            "DE - Vodafone": "DE - Vodafone",
+            "FR - Orange": "FR - Orange",
+            "FR - SFR": "FR - SFR",
+            "ES - Movistar": "ES - Movistar",
+            "IT - TIM": "IT - TIM",
+            "NL - KPN": "NL - KPN",
+            "PL - Orange": "PL - Orange",
+            "BR - Vivo": "BR - Vivo",
+            "IN - Jio": "IN - Jio",
+            "IN - Airtel": "IN - Airtel",
+            "JP - docomo": "JP - docomo",
+            "KR - SK Telecom": "KR - SK Telecom",
+            "AU - Telstra": "AU - Telstra",
+            "CA - Rogers": "CA - Rogers",
+            "SG - StarHub": "SG - StarHub",
+            "AE - etisalat": "AE - etisalat",
+            "TR - Turkcell": "TR - Turkcell"
+          }
+        },
+        {
+          "key": "enableDevice",
+          "title": "Spoof device / Build fields",
+          "description": "Overrides Build device identity fields using read-site patching. Includes emulator presets.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": false,
+          "values": null
+        },
+        {
+          "key": "devicePreset",
           "title": "Device preset",
-          "description": "The device to impersonate.",
-          "required": true,
+          "description": "Target device identity.",
+          "required": false,
           "type": "kotlin.String",
           "default": "Pixel 9 Pro XL",
           "values": {
@@ -284,13 +376,17 @@
             "Xperia 1 V": "Xperia 1 V",
             "Zenfone 10": "Zenfone 10",
             "ROG Phone 8": "ROG Phone 8",
-            "Fairphone 5": "Fairphone 5"
+            "Fairphone 5": "Fairphone 5",
+            "Generic emulator (ranchu)": "Generic emulator (ranchu)",
+            "Genymotion": "Genymotion",
+            "BlueStacks": "BlueStacks",
+            "Nox Player": "Nox Player"
           }
         },
         {
           "key": "spoofVersion",
           "title": "Also spoof OS version",
-          "description": "Also spoof Build.VERSION (RELEASE, SDK_INT, ...). Can break apps; off by default.",
+          "description": "Also spoof Build.VERSION RELEASE, SDK_INT, SECURITY_PATCH, INCREMENTAL. Can break apps; off by default.",
           "required": false,
           "type": "kotlin.Boolean",
           "default": false,
