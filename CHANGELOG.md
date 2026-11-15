@@ -1,3 +1,9 @@
+## [1.17.1](https://github.com/sqzass/lustx-patches/compare/v1.17.0...v1.17.1) (2026-11-15)
+
+### 🐛 Bug Fixes
+
+* **SpoofDeviceIdentityPatch.kt:** accidentally used old code LMFAOAOOO ([40d706b](https://github.com/sqzass/lustx-patches/commit/40d706bf14ceb6a3059c71d3f2b2ce7718f0f137))
+
 ## [1.17.0](https://github.com/sqzass/lustx-patches/compare/v1.16.0...v1.17.0) (2026-11-15)
 
 ### ✨ New Features
