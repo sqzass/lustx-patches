@@ -24,19 +24,28 @@ private val EMU_RE = Regex(
 )
 
 private fun shouldNoOp(m: Method): Boolean {
+    if (m.implementation == null) return false
+
     val name = m.name
     val ret = m.returnType
-    if (ret == "Z") return ROOT_RE.matches(name) || EMU_RE.matches(name)
-    if (ret == "V") return ROOT_RE.matches(name) || EMU_RE.matches(name)
-    return false
+
+    if (ret != "Z" && ret != "V") return false
+
+    return ROOT_RE.matches(name) || EMU_RE.matches(name)
 }
 
 private fun processClass(classDef: ClassDef) {
-    val targets = classDef.methods.filter(::shouldNoOp)
+    val targets = classDef.methods.filter { m ->
+        m.implementation != null && shouldNoOp(m)
+    }
+
     if (targets.isEmpty()) return
+
     val mc = mutableClassDefBy(classDef)
+
     targets.forEach { m ->
         val mm = mc.findMutableMethodOf(m)
+
         when (m.returnType) {
             "Z" -> mm.returnEarly(false)
             "V" -> mm.returnEarly()
