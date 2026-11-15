@@ -210,6 +210,57 @@
       "options": []
     },
     {
+      "name": "Rate-us popup",
+      "description": "Either removes the rate-us popup entirely, or rewrites its text. Rewrite mode changes the dialog title/body/buttons. Remove mode kills the trigger so the popup never appears.",
+      "default": false,
+      "category": null,
+      "compatiblePackages": null,
+      "options": [
+        {
+          "key": "removePopup",
+          "title": "Remove popup entirely",
+          "description": "Prevents the rate-us dialog from ever appearing. Off = rewrite mode (change text instead of removing).",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": true,
+          "values": null
+        },
+        {
+          "key": "customTitle",
+          "title": "Dialog title",
+          "description": "Replaces rate_app_title and rate_head. Only used if remove is off.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "Lustx was here",
+          "values": {
+            "Lustx was here": "Lustx was here"
+          }
+        },
+        {
+          "key": "customBody",
+          "title": "Dialog body",
+          "description": "Replaces rate_request and rate_app_propose. Only used if remove is off.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "This build was patched. The original rating prompt was replaced.",
+          "values": {
+            "This build was patched. The original rating prompt was replaced.": "This build was patched. The original rating prompt was replaced."
+          }
+        },
+        {
+          "key": "customConfirm",
+          "title": "Confirm button",
+          "description": "Replaces rate_rate_now. Only used if remove is off.",
+          "required": false,
+          "type": "kotlin.String",
+          "default": "Nice",
+          "values": {
+            "Nice": "Nice"
+          }
+        }
+      ]
+    },
+    {
       "name": "Remove PairIP",
       "description": "Removes the PairIP Play licensing gate (startup license check, response validation, repeated checks and paywall/kill path). Does not bypass PairIP native virtualization or Play Integrity attestation.",
       "default": false,
