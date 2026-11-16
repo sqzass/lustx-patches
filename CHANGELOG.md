@@ -1,3 +1,9 @@
+## [1.19.1](https://github.com/sqzass/lustx-patches/compare/v1.19.0...v1.19.1) (2026-11-16)
+
+### 🐛 Bug Fixes
+
+* **Pawxy:** make the `Rate-us popup` patch Pawxy specific. ([b17d080](https://github.com/sqzass/lustx-patches/commit/b17d0801c3e593060a6f581948cca357c426c4f0))
+
 ## [1.19.0](https://github.com/sqzass/lustx-patches/compare/v1.18.1...v1.19.0) (2026-11-15)
 
 ### ✨ New Features
