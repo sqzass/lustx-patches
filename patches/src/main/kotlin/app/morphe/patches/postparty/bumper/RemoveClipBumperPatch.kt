@@ -26,12 +26,10 @@ private const val CONFIG_CLASS = "Lqj/c;"
 private const val BUMPER_FIELD = "p"
 private const val TRANSCODE_FIELD = "o"
 
-private fun constFor(reg: Int, value: Int): String {
-    return when {
-        reg < 16 -> "const/4 v$reg, $value"
-        reg < 256 -> "const/16 v$reg, $value"
-        else -> "const v$reg, $value"
-    }
+private fun constFor(reg: Int, value: Int): String = when {
+    reg < 16 -> "const/4 v$reg, $value"
+    reg < 256 -> "const/16 v$reg, $value"
+    else -> "const v$reg, $value"
 }
 
 private fun readsField(ins: Instruction, field: String): Boolean {
