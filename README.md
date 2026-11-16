@@ -30,7 +30,7 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.19.1](https://github.com/sqzass/lustx-patches/releases/tag/v1.19.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;25 patches total
+> **[v1.20.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.20.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;26 patches total
 <details>
 <summary>📦 PortDroid - Network Analysis&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
@@ -47,7 +47,7 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 </details>
 
 <details>
-<summary>📦 Pawxy - Fast VPN & Web Browser&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<summary>📦 Pawxy - Fast VPN & Web Browser&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -57,6 +57,7 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
+| [Enable media sniffer](#enable-media-sniffer) | Restores Pawxy's hidden video/media sniffer to the default tool menu. The toolbar builder excludes Tool$Action.SNIFFER from the default list; this patch removes that exclusion so the sniffer appears like any other tool. |  |
 | [Rate-us popup](#rate-us-popup) | Either removes the rate-us popup entirely, or rewrites its text. Rewrite mode changes the dialog title/body/buttons. Remove mode kills the trigger so the popup never appears. | • Remove popup entirely<br>• Dialog title<br>• Dialog body<br>• Confirm button |
 | [Unlock premium](#unlock-premium) | Unlocks Pawxy premium features (VPN servers, removes paywall and upsell badges). |  |
 

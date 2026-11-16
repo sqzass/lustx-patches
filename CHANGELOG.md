@@ -1,3 +1,9 @@
+## [1.20.0](https://github.com/sqzass/lustx-patches/compare/v1.19.1...v1.20.0) (2026-11-16)
+
+### ✨ New Features
+
+* **Pawxy:** adds a force-enable `Sniffer` patch (sniffer allows for downloading media easily). ([b54b3ca](https://github.com/sqzass/lustx-patches/commit/b54b3ca48f0ea690eeded46d3aabde818af95586))
+
 ## [1.19.1](https://github.com/sqzass/lustx-patches/compare/v1.19.0...v1.19.1) (2026-11-16)
 
 ### 🐛 Bug Fixes
