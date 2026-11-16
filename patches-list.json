@@ -1,6 +1,6 @@
 {
   "NOTE": "Do NOT manually edit this file. This file is automatically updated when semantic release (release.yml) runs. Manually editing this file can break your releases and break third party tools that use this file.",
-  "version": "1.22.0",
+  "version": "1.22.1",
   "patches": [
     {
       "name": "Allow screen recording",
@@ -365,7 +365,7 @@
     },
     {
       "name": "Remove clip bumper",
-      "description": "Removes the ~5s Postparty logo bumper appended to exported clips. The bumper is concatenated client-side by FFmpegKit, gated on the enableClipBumper client-config flag. This forces every read of that flag to false, so the bumper is never downloaded or stitched on any export path.",
+      "description": "Removes the ~5s Postparty logo bumper from exported clips. The bumper is concatenated client-side by FFmpegKit; this nulls the bumper path parameter in the export command builder so the trim/scale/concat block is never emitted, regardless of whether a bumper file is already cached.",
       "default": true,
       "category": null,
       "compatiblePackages": [
@@ -388,17 +388,7 @@
           ]
         }
       ],
-      "options": [
-        {
-          "key": "forceClientTranscoding",
-          "title": "Force client-side transcoding",
-          "description": "Also forces enableClientTranscoding true. Only needed if the bumper persists after patching, which would mean the server transcodes and adds it. Leave off unless required: forcing it on an unsupported device can break export.",
-          "required": false,
-          "type": "kotlin.Boolean",
-          "default": false,
-          "values": null
-        }
-      ]
+      "options": []
     },
     {
       "name": "Remove rate-us / review prompts",

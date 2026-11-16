@@ -1,3 +1,9 @@
+## [1.22.1](https://github.com/sqzass/lustx-patches/compare/v1.22.0...v1.22.1) (2026-11-16)
+
+### 🐛 Bug Fixes
+
+* **Postparty:** fix fingerprint for the ending ([8593b01](https://github.com/sqzass/lustx-patches/commit/8593b017e432093a8bcc44841c8b8bdcdae2d882))
+
 ## [1.22.0](https://github.com/sqzass/lustx-patches/compare/v1.21.0...v1.22.0) (2026-11-16)
 
 ### ✨ New Features
