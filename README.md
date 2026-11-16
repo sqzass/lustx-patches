@@ -97,8 +97,7 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 
 ## Contributing
 
-We currently accept pull requests for fixes/improvements to the Pawxy patch.
-If you have developed patches for other apps, you are encouraged to release your patches in a third party repository.
+If you have developed patches for other apps, you are encouraged to release your patches in a third party repository rather than request them to be added to mine (unless you don't want to deal with pushing... for whatever reason).
 See the [Patches template](https://github.com/morpheapp/morphe-patches-template) for more information.
 
 Before opening a pull request, read the [contribution guidelines](CONTRIBUTING.md).
