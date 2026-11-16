@@ -17,24 +17,21 @@ import com.android.tools.smali.dexlib2.AccessFlags
 
 private const val BUILDER_CLASS = "LV7/a;"
 
+private fun isStatic(method: MutableMethod): Boolean = (method.accessFlags and AccessFlags.STATIC.value) != 0
+
 private fun constFor(reg: Int, value: Int): String = when {
     reg < 16 -> "const/4 v$reg, $value"
     reg < 256 -> "const/16 v$reg, $value"
     else -> throw PatchException("Register v$reg is too wide for a const instruction.")
 }
 
-/**
- * Nulls an object parameter at method entry. Safe here because the bumper path is
- * nullable by contract and is only read by the bumper condition.
- */
 private fun nullOutParam(method: MutableMethod, paramIndex: Int) {
     val impl = method.implementation
         ?: throw PatchException("${method.name} has no implementation.")
 
-    val isStatic = (method.accessFlags and AccessFlags.STATIC.value) != 0
     val paramRegs = method.parameterTypes.sumOf {
         if (it.toString() == "J" || it.toString() == "D") 2 else 1
-    } + if (isStatic) 0 else 1
+    } + if (isStatic(method)) 0 else 1
 
     val reg = impl.registerCount - paramRegs + paramIndex
     method.addInstruction(0, constFor(reg, 0))
@@ -45,8 +42,8 @@ val removeClipBumperPatch = patch(
     name = "Remove clip bumper",
     description = "Removes the ~5s Postparty logo bumper from exported clips. " +
         "The bumper is concatenated client-side by FFmpegKit; this nulls the bumper " +
-        "path parameter in the export command builder so the trim/scale/concat block " +
-        "is never emitted, regardless of whether a bumper file is already cached.",
+        "path parameter in both export command builders (single-clip and multi-clip) " +
+        "so the trim/scale/concat blocks are never emitted.",
     default = true,
 ) {
     compatibleWith(
@@ -61,13 +58,23 @@ val removeClipBumperPatch = patch(
         val mc = mutableClassDefByOrNull(BUILDER_CLASS)
             ?: throw PatchException("$BUILDER_CLASS not found; class name drifted.")
 
-        val target = mc.methods.filterIsInstance<MutableMethod>().firstOrNull { m ->
+        val methods = mc.methods.filterIsInstance<MutableMethod>()
+
+        val singleClip = methods.firstOrNull { m ->
             m.name == "h" &&
                 m.returnType == "Ljava/lang/String;" &&
                 m.parameterTypes.size == 8 &&
-                (m.accessFlags and AccessFlags.STATIC.value) != 0
-        } ?: throw PatchException("V7.a.h(8 args) not found; signature drifted.")
+                isStatic(m)
+        } ?: throw PatchException("V7.a.h (single-clip builder) not found.")
 
-        nullOutParam(target, 4)
+        val multiClip = methods.firstOrNull { m ->
+            m.name == "l" &&
+                m.returnType == "Ljava/lang/Object;" &&
+                m.parameterTypes.size == 8 &&
+                isStatic(m)
+        } ?: throw PatchException("V7.a.l (multi-clip builder) not found.")
+
+        nullOutParam(singleClip, 4)
+        nullOutParam(multiClip, 2)
     }
 }
