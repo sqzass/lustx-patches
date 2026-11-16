@@ -8,6 +8,9 @@ package app.morphe.patches.pawxy.rate
 
 import app.morphe.patcher.Fingerprint
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
+import app.morphe.patcher.patch.ApkFileType
+import app.morphe.patcher.patch.AppTarget
+import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.booleanOption
 import app.morphe.patcher.patch.document
 import app.morphe.patcher.patch.patch
@@ -32,8 +35,19 @@ val ratePopupTextPatch = patch(
     description = "Either removes the rate-us popup entirely, or rewrites its text. " +
         "Rewrite mode changes the dialog title/body/buttons. Remove mode kills the " +
         "trigger so the popup never appears.",
-    default = false,
 ) {
+    compatibleWith(
+        Compatibility(
+            name = "Pawxy - Fast VPN & Web Browser",
+            packageName = "com.pawxy.browser",
+            apkFileType = ApkFileType.APKS_REQUIRED,
+            appIconColor = 0x00E4FF,
+            targets = listOf(
+                AppTarget(version = "1.15.1", versionCode = 104, minSdk = 26),
+            ),
+        ),
+    )
+
     val removePopup by booleanOption(
         key = "removePopup",
         default = true,
