@@ -7,44 +7,46 @@
 package app.morphe.patches.postparty.bumper
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
-import app.morphe.patcher.extensions.InstructionExtensions.instructions
 import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.PatchException
-import app.morphe.patcher.patch.booleanOption
-import app.morphe.patcher.patch.classDefForEach
-import app.morphe.patcher.patch.mutableClassDefBy
+import app.morphe.patcher.patch.mutableClassDefByOrNull
 import app.morphe.patcher.patch.patch
-import app.morphe.patcher.util.findMutableMethodOf
-import app.morphe.patcher.util.getReference
-import com.android.tools.smali.dexlib2.Opcode
-import com.android.tools.smali.dexlib2.iface.instruction.Instruction
-import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
-import com.android.tools.smali.dexlib2.iface.reference.FieldReference
+import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
+import com.android.tools.smali.dexlib2.AccessFlags
 
-private const val CONFIG_CLASS = "Lqj/c;"
-private const val BUMPER_FIELD = "p"
-private const val TRANSCODE_FIELD = "o"
+private const val BUILDER_CLASS = "LV7/a;"
 
 private fun constFor(reg: Int, value: Int): String = when {
     reg < 16 -> "const/4 v$reg, $value"
     reg < 256 -> "const/16 v$reg, $value"
-    else -> "const v$reg, $value"
+    else -> throw PatchException("Register v$reg is too wide for a const instruction.")
 }
 
-private fun readsField(ins: Instruction, field: String): Boolean {
-    if (ins.opcode != Opcode.IGET_BOOLEAN) return false
-    val ref = ins.getReference<FieldReference>() ?: return false
-    return ref.definingClass == CONFIG_CLASS && ref.name == field && ref.type == "Z"
+/**
+ * Nulls an object parameter at method entry. Safe here because the bumper path is
+ * nullable by contract and is only read by the bumper condition.
+ */
+private fun nullOutParam(method: MutableMethod, paramIndex: Int) {
+    val impl = method.implementation
+        ?: throw PatchException("${method.name} has no implementation.")
+
+    val isStatic = (method.accessFlags and AccessFlags.STATIC.value) != 0
+    val paramRegs = method.parameterTypes.sumOf {
+        if (it.toString() == "J" || it.toString() == "D") 2 else 1
+    } + if (isStatic) 0 else 1
+
+    val reg = impl.registerCount - paramRegs + paramIndex
+    method.addInstruction(0, constFor(reg, 0))
 }
 
 @Suppress("unused")
 val removeClipBumperPatch = patch(
     name = "Remove clip bumper",
-    description = "Removes the ~5s Postparty logo bumper appended to exported clips. " +
-        "The bumper is concatenated client-side by FFmpegKit, gated on the " +
-        "enableClipBumper client-config flag. This forces every read of that flag " +
-        "to false, so the bumper is never downloaded or stitched on any export path.",
+    description = "Removes the ~5s Postparty logo bumper from exported clips. " +
+        "The bumper is concatenated client-side by FFmpegKit; this nulls the bumper " +
+        "path parameter in the export command builder so the trim/scale/concat block " +
+        "is never emitted, regardless of whether a bumper file is already cached.",
     default = true,
 ) {
     compatibleWith(
@@ -55,56 +57,17 @@ val removeClipBumperPatch = patch(
         ),
     )
 
-    val forceClientTranscoding by booleanOption(
-        key = "forceClientTranscoding",
-        default = false,
-        title = "Force client-side transcoding",
-        description = "Also forces enableClientTranscoding true. Only needed if the bumper " +
-            "persists after patching, which would mean the server transcodes and adds it. " +
-            "Leave off unless required: forcing it on an unsupported device can break export.",
-    )
-
     execute {
-        val wantTranscode = forceClientTranscoding == true
-        var bumperSites = 0
+        val mc = mutableClassDefByOrNull(BUILDER_CLASS)
+            ?: throw PatchException("$BUILDER_CLASS not found; class name drifted.")
 
-        classDefForEach { classDef ->
-            val candidates = classDef.methods.filter { m ->
-                m.implementation?.instructions?.any { ins ->
-                    readsField(ins, BUMPER_FIELD) ||
-                        (wantTranscode && readsField(ins, TRANSCODE_FIELD))
-                } == true
-            }
-            if (candidates.isEmpty()) return@classDefForEach
+        val target = mc.methods.filterIsInstance<MutableMethod>().firstOrNull { m ->
+            m.name == "h" &&
+                m.returnType == "Ljava/lang/String;" &&
+                m.parameterTypes.size == 8 &&
+                (m.accessFlags and AccessFlags.STATIC.value) != 0
+        } ?: throw PatchException("V7.a.h(8 args) not found; signature drifted.")
 
-            val mc = mutableClassDefBy(classDef)
-            candidates.forEach { m ->
-                val mm = mc.findMutableMethodOf(m)
-                val list = mm.instructions
-
-                val hits = list.indices.filter { i ->
-                    readsField(list[i], BUMPER_FIELD) ||
-                        (wantTranscode && readsField(list[i], TRANSCODE_FIELD))
-                }
-
-                hits.asReversed().forEach { i ->
-                    val ins = list[i]
-                    val reg = (ins as TwoRegisterInstruction).registerA
-                    if (readsField(ins, BUMPER_FIELD)) {
-                        mm.addInstruction(i + 1, constFor(reg, 0))
-                        bumperSites++
-                    } else {
-                        mm.addInstruction(i + 1, constFor(reg, 1))
-                    }
-                }
-            }
-        }
-
-        if (bumperSites == 0) {
-            throw PatchException(
-                "No reads of $CONFIG_CLASS->$BUMPER_FIELD:Z found. The obfuscated field " +
-                    "name likely changed in this version; re-check ClientConfigurationResponse.",
-            )
-        }
+        nullOutParam(target, 4)
     }
 }
