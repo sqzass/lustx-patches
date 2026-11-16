@@ -30,7 +30,7 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.18.1](https://github.com/sqzass/lustx-patches/releases/tag/v1.18.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`dev`&nbsp;&nbsp;•&nbsp;&nbsp;25 patches total
+> **[v1.21.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.21.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;29 patches total
 <details>
 <summary>📦 PortDroid - Network Analysis&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
@@ -47,7 +47,7 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 </details>
 
 <details>
-<summary>📦 Pawxy - Fast VPN & Web Browser&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<summary>📦 Pawxy - Fast VPN & Web Browser&nbsp;&nbsp;•&nbsp;&nbsp;3 patches</summary>
 <br>
 
 **🎯 Supported versions:**
@@ -57,13 +57,14 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
+| [Enable media sniffer](#enable-media-sniffer) | Restores Pawxy's hidden video/media sniffer to the default tool menu. The toolbar builder excludes Tool$Action.SNIFFER from the default list; this patch removes that exclusion so the sniffer appears like any other tool. |  |
 | [Rate-us popup](#rate-us-popup) | Either removes the rate-us popup entirely, or rewrites its text. Rewrite mode changes the dialog title/body/buttons. Remove mode kills the trigger so the popup never appears. | • Remove popup entirely<br>• Dialog title<br>• Dialog body<br>• Confirm button |
 | [Unlock premium](#unlock-premium) | Unlocks Pawxy premium features (VPN servers, removes paywall and upsell badges). |  |
 
 </details>
 
 <details>
-<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;22 patches</summary>
+<summary>🌐 Universal&nbsp;&nbsp;•&nbsp;&nbsp;25 patches</summary>
 <br>
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
@@ -75,8 +76,10 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 | [Change package name](#change-package-name) | Renames the app package (appends ".lustx" by default) and updates custom permissions and content-provider authorities. Changing the package name can break apps that hardcode their package or authorities in code. | • Package name<br>• Update permissions<br>• Update provider authorities |
 | [Change version name / code](#change-version-name-code) | Rewrites the manifest versionName/versionCode and the baked-in BuildConfig values. 'Current' keeps the existing value. | • Version name<br>• Version code |
 | [Custom font](#custom-font) | Overrides the app's typeface with a built-in font family. Affects explicit Typeface usage; views that never set a typeface keep the system default. | • Font family |
+| [Disable ads](#disable-ads) | Neutralizes common ad SDKs (AdMob, Unity, Meta, AppLovin) by forcing their void load/show sinks to no-op and their boolean readiness predicates to false. Object-returning APIs are left intact to avoid null returns. Missing SDKs are skipped, so this is safe as a universal patch. Tradeoff: rewarded-ad gates never complete, so 'watch an ad to unlock' flows dead-end. |  |
 | [Disable boot start-up](#disable-boot-start-up) | Prevents the app from auto-starting on device boot by removing boot intent-filter actions and the RECEIVE_BOOT_COMPLETED permission. | • Also block update start-up |
 | [Force dark / AMOLED theme](#force-dark-amoled-theme) | Forces AppCompat night mode to YES and (optionally) flips AMOLED/pure-black flags. Covers AppCompat/Material apps; Jetpack Compose themes are not affected. | • Enable AMOLED / pure-black |
+| [Force refresh rate](#force-refresh-rate) | Rewrites the float argument at Surface.setFrameRate() call sites to the selected refresh rate. This only affects apps that already request a frame rate; it does not globally force a display mode. Missing call sites are skipped safely. | • Target refresh rate<br>• Patch Surface.setFrameRate() |
 | [Forced-update bypass](#forced-update-bypass) | Neuters in-app forced-update gates (dialogs, blocking checks, version prompts). Works on apps that keep readable method names; fully-obfuscated apps need per-app fingerprints. |  |
 | [Hide app icon](#hide-app-icon) | Hides the app from the launcher by replacing the LAUNCHER category with DEFAULT. The app stays installed; launch it via another app or a shortcut. |  |
 | [Remove PairIP](#remove-pairip) | Removes the PairIP Play licensing gate (startup license check, response validation, repeated checks and paywall/kill path). Does not bypass PairIP native virtualization or Play Integrity attestation. |  |
@@ -88,7 +91,8 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 | [Spoof rooted environment](#spoof-rooted-environment) | Makes Java-level root checks report rooted: forces named detection methods true, spoofs Build.TAGS/USER/HOST at read sites, and forces su-path file checks to succeed. String/field-based targeting survives obfuscation. Native checks and Runtime.exec("su") are not faked. | • Spoof Build fields |
 | [Strip VPN checks](#strip-vpn-checks) | Hides an active VPN from the app by neutralizing NetworkCapabilities transport/capability checks and (optionally) network-interface name checks. | • Also strip interface-name checks |
 | [Strip sensitive permissions](#strip-sensitive-permissions) | Removes selected sensitive permissions from the manifest. Can break features that rely on them; enable only the groups you want stripped. | • Location<br>• Contacts & accounts<br>• SMS & call log<br>• Phone<br>• Camera & microphone<br>• Storage / media<br>• Sensors & activity<br>• Calendar<br>• Nearby devices<br>• Notifications |
-| [Telemetry / crash-reporter kill](#telemetry-crash-reporter-kill) | Silences analytics, crash-reporting and telemetry SDKs (Firebase, Sentry, Adjust, Mixpanel, Amplitude, Segment, AppMetrica, Bugly, ACRA, etc.). | • Also kill SDK initialization |
+| [Telemetry / crash-reporter kill](#telemetry-crash-reporter-kill) | Silences common analytics, crash-reporting, attribution, session-replay and telemetry SDKs by forcing void logging/tracking sinks and boolean readiness predicates to no-op. Object-returning SDK methods are left intact to avoid null return crashes. Missing SDKs are skipped, so this is safe as a universal patch. | • Also kill SDK initialization |
+| [Toast on launch](#toast-on-launch) | Shows a Toast when the app starts by injecting framework Toast calls into the Application subclass's onCreate(). Pure inline smali — adds no classes or methods. No-op, never crashes, if the app has no custom Application, does not override onCreate, or its onCreate has too few free registers. | • Toast message<br>• Long duration |
 | [Universal cleanup](#universal-cleanup) | Removes junk metadata files and (optionally) strips debug logging calls. | • Strip debug logging<br>• Remove Kotlin module metadata |
 
 </details>

@@ -1,3 +1,12 @@
+## [1.21.0](https://github.com/sqzass/lustx-patches/compare/v1.20.0...v1.21.0) (2026-11-16)
+
+### ✨ New Features
+
+* **all:** add a disable ads patch ([cfb6b23](https://github.com/sqzass/lustx-patches/commit/cfb6b2396d3cdf70b63312b487ed19429bcaeec6))
+* **all:** add a remove telemetry patch ([8798d00](https://github.com/sqzass/lustx-patches/commit/8798d00e5d53fd01706063e5a3b01be90779a1be))
+* **all:** add force refresh rate patch ([c3c7245](https://github.com/sqzass/lustx-patches/commit/c3c72451c1ca85b617cc8cc6232cce9d002fa093))
+* **all:** add show toast on launch patch ([22cddc2](https://github.com/sqzass/lustx-patches/commit/22cddc242b26a9e84fe8be47848b10ec935b9c0a))
+
 ## [1.20.0](https://github.com/sqzass/lustx-patches/compare/v1.19.1...v1.20.0) (2026-11-16)
 
 ### ✨ New Features
