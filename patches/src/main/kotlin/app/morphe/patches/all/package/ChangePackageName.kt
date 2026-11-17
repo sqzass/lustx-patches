@@ -13,12 +13,12 @@ val changePackageNamePatch = resourcePatch(
 ) {
     val packageNameOption = stringOption(
         key = "packageName",
-        default = "Default",
-        values = mapOf("Default" to "Default"),
+        default = null,
+        values = null,
         title = "Package name",
-        description = "New package name. \"Default\" appends \".lustx\" to the original.",
-        required = true,
-    ) { it == "Default" || (it != null && it.matches(Regex("^[a-z]\\w*(\\.[a-z]\\w*)+$"))) }
+        description = "Custom package name. Left blank, the original package is suffixed with '.lustx'.",
+        required = false,
+    ) { it == null || it.isBlank() || it.matches(Regex("^[a-z]\\w*(\\.[a-z]\\w*)+$")) }
 
     val updatePermissions by booleanOption(
         key = "updatePermissions",
@@ -43,11 +43,9 @@ val changePackageNamePatch = resourcePatch(
             val manifest = elementsByTag("manifest").first()
             val oldPackage = manifest.getAttribute("package")
             val newPackage =
-                if (packageNameOption.value == "Default") {
-                    "$oldPackage.lustx"
-                } else {
-                    packageNameOption.value!!
-                }
+                packageNameOption.value
+                    ?.takeIf { it.isNotBlank() }
+                    ?: "$oldPackage.lustx"
 
             if (updatePermissions == true) {
                 (elementsByTag("permission") + elementsByTag("uses-permission")).forEach { el ->
