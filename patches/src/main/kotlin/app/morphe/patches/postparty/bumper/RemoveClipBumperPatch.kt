@@ -7,15 +7,25 @@
 package app.morphe.patches.postparty.bumper
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
+import app.morphe.patcher.extensions.InstructionExtensions.instructions
 import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.mutableClassDefByOrNull
 import app.morphe.patcher.patch.patch
+import app.morphe.patcher.util.getReference
 import app.morphe.patcher.util.proxy.mutableTypes.MutableMethod
 import com.android.tools.smali.dexlib2.AccessFlags
+import com.android.tools.smali.dexlib2.Opcode
+import com.android.tools.smali.dexlib2.iface.instruction.Instruction
+import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.reference.FieldReference
 
 private const val BUILDER_CLASS = "LV7/a;"
+private const val TRANSCODE_FLAG_CLASS = "LBi/T;"
+private const val TRANSCODE_FLAG_FIELD = "a"
+
+private fun isStatic(method: MutableMethod): Boolean = (method.accessFlags and AccessFlags.STATIC.value) != 0
 
 private fun constFor(reg: Int, value: Int): String = when {
     reg < 16 -> "const/4 v$reg, $value"
@@ -23,18 +33,13 @@ private fun constFor(reg: Int, value: Int): String = when {
     else -> throw PatchException("Register v$reg is too wide for a const instruction.")
 }
 
-/**
- * Nulls an object parameter at method entry. Safe here because the bumper path is
- * nullable by contract and is only read by the bumper condition.
- */
 private fun nullOutParam(method: MutableMethod, paramIndex: Int) {
     val impl = method.implementation
         ?: throw PatchException("${method.name} has no implementation.")
 
-    val isStatic = (method.accessFlags and AccessFlags.STATIC.value) != 0
     val paramRegs = method.parameterTypes.sumOf {
         if (it.toString() == "J" || it.toString() == "D") 2 else 1
-    } + if (isStatic) 0 else 1
+    } + if (isStatic(method)) 0 else 1
 
     val reg = impl.registerCount - paramRegs + paramIndex
     method.addInstruction(0, constFor(reg, 0))
@@ -43,10 +48,10 @@ private fun nullOutParam(method: MutableMethod, paramIndex: Int) {
 @Suppress("unused")
 val removeClipBumperPatch = patch(
     name = "Remove clip bumper",
-    description = "Removes the ~5s Postparty logo bumper from exported clips. " +
-        "The bumper is concatenated client-side by FFmpegKit; this nulls the bumper " +
-        "path parameter in the export command builder so the trim/scale/concat block " +
-        "is never emitted, regardless of whether a bumper file is already cached.",
+    description = "Removes the ~5s Postparty logo bumper from all exports. Forces " +
+        "client-side transcoding so unedited clips re-encode instead of direct-saving " +
+        "the server-baked file, then nulls the bumper path in both ffmpeg command " +
+        "builders so the re-encode never appends it.",
     default = true,
 ) {
     compatibleWith(
@@ -58,16 +63,55 @@ val removeClipBumperPatch = patch(
     )
 
     execute {
-        val mc = mutableClassDefByOrNull(BUILDER_CLASS)
+        val builders = mutableClassDefByOrNull(BUILDER_CLASS)
             ?: throw PatchException("$BUILDER_CLASS not found; class name drifted.")
 
-        val target = mc.methods.filterIsInstance<MutableMethod>().firstOrNull { m ->
+        val flagClass = mutableClassDefByOrNull(TRANSCODE_FLAG_CLASS)
+            ?: throw PatchException("$TRANSCODE_FLAG_CLASS not found; class name drifted.")
+
+        val methods = builders.methods.filterIsInstance<MutableMethod>()
+
+        val singleClip = methods.firstOrNull { m ->
             m.name == "h" &&
                 m.returnType == "Ljava/lang/String;" &&
                 m.parameterTypes.size == 8 &&
-                (m.accessFlags and AccessFlags.STATIC.value) != 0
-        } ?: throw PatchException("V7.a.h(8 args) not found; signature drifted.")
+                isStatic(m)
+        } ?: throw PatchException("V7.a.h single-clip builder not found.")
 
-        nullOutParam(target, 4)
+        val multiClip = methods.firstOrNull { m ->
+            m.name == "l" &&
+                m.returnType == "Ljava/lang/Object;" &&
+                m.parameterTypes.size == 8 &&
+                isStatic(m)
+        } ?: throw PatchException("V7.a.l multi-clip builder not found.")
+
+        nullOutParam(singleClip, 4)
+        nullOutParam(multiClip, 2)
+
+        val ctor = flagClass.methods
+            .filterIsInstance<MutableMethod>()
+            .firstOrNull { it.name == "<init>" }
+            ?: throw PatchException("$TRANSCODE_FLAG_CLASS has no constructor.")
+
+        val impl = ctor.implementation
+            ?: throw PatchException("$TRANSCODE_FLAG_CLASS.<init> has no implementation.")
+
+        val list = impl.instructions
+
+        val idx = list.indexOfFirst { ins: Instruction ->
+            if (ins.opcode != Opcode.IPUT_BOOLEAN) return@indexOfFirst false
+
+            val ref = ins.getReference<FieldReference>() ?: return@indexOfFirst false
+            ref.definingClass == TRANSCODE_FLAG_CLASS &&
+                ref.name == TRANSCODE_FLAG_FIELD &&
+                ref.type == "Z"
+        }
+
+        if (idx < 0) {
+            throw PatchException("No IPUT_BOOLEAN to $TRANSCODE_FLAG_CLASS->$TRANSCODE_FLAG_FIELD:Z found.")
+        }
+
+        val valueReg = (list[idx] as TwoRegisterInstruction).registerA
+        ctor.addInstruction(idx, constFor(valueReg, 1))
     }
 }
