@@ -20,9 +20,7 @@ private const val LICENSE_CLIENT = "Lcom/pairip/licensecheck/LicenseClient;"
 @Suppress("unused")
 val removePairIpPatch = patch(
     name = "Remove PairIP",
-    description = "Removes the PairIP Play licensing gate (startup license check, response " +
-        "validation, repeated checks and paywall/kill path). Does not bypass PairIP native " +
-        "virtualization or Play Integrity attestation.",
+    description = "Removes the PairIP Play licensing gate.",
     default = false,
 ) {
     execute {

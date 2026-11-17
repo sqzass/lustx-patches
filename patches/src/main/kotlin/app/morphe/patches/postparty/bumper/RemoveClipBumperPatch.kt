@@ -48,10 +48,7 @@ private fun nullOutParam(method: MutableMethod, paramIndex: Int) {
 @Suppress("unused")
 val removeClipBumperPatch = patch(
     name = "Remove clip bumper",
-    description = "Removes the ~5s Postparty logo bumper from all exports. Forces " +
-        "client-side transcoding so unedited clips re-encode instead of direct-saving " +
-        "the server-baked file, then nulls the bumper path in both ffmpeg command " +
-        "builders so the re-encode never appends it.",
+    description = "Removes the Postparty logo bumper from all exports.",
     default = true,
 ) {
     compatibleWith(

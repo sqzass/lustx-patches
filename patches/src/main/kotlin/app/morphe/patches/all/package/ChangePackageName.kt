@@ -8,9 +8,7 @@ import org.w3c.dom.Element
 @Suppress("unused")
 val changePackageNamePatch = resourcePatch(
     name = "Change package name",
-    description = "Renames the app package (appends \".lustx\" by default) and updates custom " +
-        "permissions and content-provider authorities. Changing the package name can break " +
-        "apps that hardcode their package or authorities in code.",
+    description = "Renames the app package.",
     default = false,
 ) {
     val packageNameOption = stringOption(
