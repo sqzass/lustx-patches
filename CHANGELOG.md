@@ -1,3 +1,9 @@
+## [1.22.3](https://github.com/sqzass/lustx-patches/compare/v1.22.2...v1.22.3) (2026-11-18)
+
+### 🐛 Bug Fixes
+
+* **Postparty:** HOPEFULLY fix bumper ([0e572e6](https://github.com/sqzass/lustx-patches/commit/0e572e68a6d21c196d53537da544d9e4448b7f6a))
+
 ## [1.22.2](https://github.com/sqzass/lustx-patches/compare/v1.22.1...v1.22.2) (2026-11-17)
 
 ### 🐛 Bug Fixes
