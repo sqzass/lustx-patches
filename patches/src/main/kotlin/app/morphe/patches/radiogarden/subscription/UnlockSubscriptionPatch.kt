@@ -38,7 +38,7 @@ val unlockSubscriptionPatch = bytecodePatch(
             packageName = "com.jonathanpuckey.radiogarden",
             apkFileType = ApkFileType.APKS_REQUIRED,
             targets = listOf(
-                AppTarget(version = "4.0.2", versionCode = "6194392"),
+                AppTarget(version = "4.0.2", versionCode = 6194392),
             ),
         ),
     )
