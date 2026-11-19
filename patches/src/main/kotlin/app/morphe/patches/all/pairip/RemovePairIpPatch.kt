@@ -86,5 +86,10 @@ val removePairIpPatch = patch(
         mutableClassDefByOrNull("Lcom/pairip/SignatureCheck;")
             ?.methods?.firstOrNull { it.name == "verifyIntegrity" && it.returnType == "V" }
             ?.returnEarly()
+
+        // 7. Skip the startup VM program (contains native installer/license checks)
+        mutableClassDefByOrNull("Lcom/pairip/StartupLauncher;")
+            ?.methods?.firstOrNull { it.name == "launch" && it.returnType == "V" }
+            ?.returnEarly()
     }
 }
