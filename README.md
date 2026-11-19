@@ -30,7 +30,7 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.22.3](https://github.com/sqzass/lustx-patches/releases/tag/v1.22.3)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;30 patches total
+> **[v1.23.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.23.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;31 patches total
 <details>
 <summary>📦 PortDroid - Network Analysis&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
@@ -75,6 +75,21 @@ _Note: All app files placed in `apks/` are processed and automatically deleted o
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Remove clip bumper](#remove-clip-bumper) | Removes the Postparty logo bumper from all exports. |  |
+
+</details>
+
+<details>
+<summary>📦 Radio Garden&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 4.0.2 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Unlock subscription](#unlock-subscription) | Unlocks Radio Garden premium features (equalizer, sleep timer, removes ads). |  |
 
 </details>
 
