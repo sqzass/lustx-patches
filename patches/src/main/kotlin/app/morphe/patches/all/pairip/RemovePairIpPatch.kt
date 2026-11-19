@@ -78,5 +78,13 @@ val removePairIpPatch = patch(
                 toRemove.forEach { app.removeChild(it) }
             }
         }
+
+        // 6. VM-based variant (SignatureCheck/VMRunner, no licensecheck package).
+        //    verifyIntegrity is called from Application.attachBaseContext,
+        //    CoreComponentFactory and w0/b — patch the method, not the call sites.
+        //    Asset VM programs are load-bearing: leave VMRunner/StartupLauncher intact.
+        mutableClassDefByOrNull("Lcom/pairip/SignatureCheck;")
+            ?.methods?.firstOrNull { it.name == "verifyIntegrity" && it.returnType == "V" }
+            ?.returnEarly()
     }
 }
