@@ -1,3 +1,9 @@
+## [1.25.0](https://github.com/sqzass/lustx-patches/compare/v1.24.0...v1.25.0) (2026-11-21)
+
+### ✨ New Features
+
+* add MEGA patch ([a8a2710](https://github.com/sqzass/lustx-patches/commit/a8a271088339fc72f498503e3d5d6f34687d7443))
+
 ## [1.24.0](https://github.com/sqzass/lustx-patches/compare/v1.23.0...v1.24.0) (2026-11-19)
 
 ### ✨ New Features

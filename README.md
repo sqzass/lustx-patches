@@ -30,7 +30,7 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.24.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.24.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;31 patches total
+> **[v1.25.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.25.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;31 patches total
 <details>
 <summary>📦 PortDroid - Network Analysis&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
@@ -79,17 +79,17 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 </details>
 
 <details>
-<summary>📦 Radio Garden&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<summary>📦 MEGA&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
 
 **🎯 Supported versions:**
 
-| 4.0.2 |
+| 16.15.2 |
 | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Unlock subscription](#unlock-subscription) | Unlocks Radio Garden premium features (equalizer, sleep timer, removes ads). |  |
+| [Unlock Pro](#unlock-pro) | Unlocks MEGA `Pro I` features and removes ads. |  |
 
 </details>
 
@@ -112,7 +112,7 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 | [Force refresh rate](#force-refresh-rate) | Rewrites Surface.setFrameRate() to the selected refresh rate. | • Target refresh rate<br>• Patch Surface.setFrameRate() |
 | [Forced-update bypass](#forced-update-bypass) | Neuters in-app forced-update gates. |  |
 | [Hide app icon](#hide-app-icon) | Hides the app from the launcher. |  |
-| [Remove PairIP](#remove-pairip) | Removes the PairIP Play licensing gate. |  |
+| [Remove PairIP](#remove-pairip) | Removes PairIP licensing and signature gates. Note: VM-based variants may still enforce checks natively. |  |
 | [Remove rate-us / review prompts](#remove-rate-us-review-prompts) | Suppresses in-app rating/review prompts. | • Block Play Core review dialog |
 | [Rename app label](#rename-app-label) | Sets a literal launcher name. | • App label |
 | [Skip splash](#skip-splash) | Skips splash/intro screens. | • Convert splash delays to immediate |
