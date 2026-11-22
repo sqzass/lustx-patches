@@ -16,14 +16,22 @@ private val LISTENER_INTERFACES = setOf(
 )
 
 private val CALLBACK_METHODS = setOf(
-    "onDisplayAdded", "onDisplayRemoved", "onDisplayChanged",
-    "onStart", "onStop",
-    "onCapturedContentResize", "onCapturedContentVisibilityChanged",
+    "onDisplayAdded",
+    "onDisplayRemoved",
+    "onDisplayChanged",
+    "onStart",
+    "onStop",
+    "onCapturedContentResize",
+    "onCapturedContentVisibilityChanged",
 )
 
 private val DETECTION_TOKENS = listOf(
-    "screen_record", "screenrecord", "isrecording", "screen_mirror",
-    "com.miui.screenrecorder", "com.samsung.app.screenrecorder",
+    "screen_record",
+    "screenrecord",
+    "isrecording",
+    "screen_mirror",
+    "com.miui.screenrecorder",
+    "com.samsung.app.screenrecorder",
 )
 
 @Suppress("unused")
