@@ -30,19 +30,20 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.26.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.26.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;33 patches total
+> **[v1.27.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.27.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;36 patches total
 <details>
-<summary>📦 PortDroid - Network Analysis&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<summary>📦 PortDroid - Network Analysis&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
 
 **🎯 Supported versions:**
 
-| 1.0.7 |
-| :---: |
+| 1.0.7 | 1.3.0 |
+| :---: | :---: |
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Bypass signature check](#bypass-signature-check) | Bypasses PortDroid's signature check so the re-signed app passes validation. |  |
+| [Unlock Pro](#unlock-pro) | Unlocks PortDroid Pro features (forces the pro gate and billing status). |  |
 
 </details>
 
@@ -90,6 +91,22 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Unlock Pro](#unlock-pro) | Unlocks all MEGA Pro features and removes ads. | • Pro tier |
+
+</details>
+
+<details>
+<summary>📦 Alight Motion&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 5.0.270.1002578 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Unlock premium (core)](#unlock-premium-core) | Forces the core account-layer membership gates on. |  |
+| [Unlock premium (membership gates)](#unlock-premium-membership-gates) | Forces the remaining pro-gated feature checks on. |  |
 
 </details>
 

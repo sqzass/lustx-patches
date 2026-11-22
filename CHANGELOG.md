@@ -1,3 +1,18 @@
+## [1.27.0](https://github.com/sqzass/lustx-patches/compare/v1.26.0...v1.27.0) (2026-11-22)
+
+### ✨ New Features
+
+* add `Compliance.kt` to help failed patches from preventing a patched app  from being patched into a patched app ([d9dd964](https://github.com/sqzass/lustx-patches/commit/d9dd9640647f199291d7508915ab2f74eef52ed1))
+* add `Unlock pro` patch for PortDroid. ([fb4268c](https://github.com/sqzass/lustx-patches/commit/fb4268c6da6e05e99d8df03bdef28a4ca7268a71))
+* Alight Motion premium unlock Phase 1 (5.0.270.1002578) ([ac0e1b4](https://github.com/sqzass/lustx-patches/commit/ac0e1b45eaef938bba1bd5252fb6d5565d60f8fd))
+* **PortDroid:** add support for version `1.3.0` instead of only the outdated `1.0.7`. both work, at least that ive seen. ([a3f5636](https://github.com/sqzass/lustx-patches/commit/a3f56361bc07a3f266208ddcf500f34cd60852cb))
+* **PortDroid:** rewrite the `Bypass signature check` patch so it's more robust ([2e368e2](https://github.com/sqzass/lustx-patches/commit/2e368e2c4d51f6e3e43e3e150ac6f6abfef96941))
+
+### 🐛 Bug Fixes
+
+* pin semantic-release to 25.x (peer dep conflict) ([f5b66b6](https://github.com/sqzass/lustx-patches/commit/f5b66b69c63a740924a730e95172944ccf3db5e2))
+* **PortDroid:** `Unlock pro` patch works on both supported versions ([02dcad6](https://github.com/sqzass/lustx-patches/commit/02dcad68db1bafdf67de3097a4603e506d6a9712))
+
 ## [1.26.0](https://github.com/sqzass/lustx-patches/compare/v1.25.0...v1.26.0) (2026-11-22)
 
 ### ✨ New Features
