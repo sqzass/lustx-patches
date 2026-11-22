@@ -95,6 +95,18 @@
               "isExperimental": false,
               "minSdk": null,
               "description": null
+            },
+            {
+              "version": "1.3.0",
+              "versionCodes": {
+                "ARM64_V8A": 140,
+                "ARMEABI_V7A": 140,
+                "X86_64": 140,
+                "X86": 140
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
             }
           ]
         }

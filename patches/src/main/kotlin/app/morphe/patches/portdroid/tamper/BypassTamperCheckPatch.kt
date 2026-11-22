@@ -25,6 +25,7 @@ val bypassTamperCheckPatch = bytecodePatch(
             packageName = "com.stealthcopter.portdroid",
             targets = listOf(
                 AppTarget(version = "1.0.7", versionCode = 113),
+                AppTarget(version = "1.3.0", versionCode = 140),
             ),
         ),
     )
