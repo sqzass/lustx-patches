@@ -1004,6 +1004,70 @@
         }
       ],
       "options": []
+    },
+    {
+      "name": "Unlock premium (core)",
+      "description": "Forces the core account-layer membership gates on.",
+      "default": true,
+      "category": null,
+      "compatiblePackages": [
+        {
+          "packageName": "com.alightcreative.motion",
+          "name": "Alight Motion",
+          "description": "Requires the original 5.0.270.1002578 APK. Anchors are exact obfuscated descriptors from that build only.",
+          "apkFileType": "APK",
+          "appIconColor": null,
+          "signatures": null,
+          "formFactor": "MOBILE",
+          "targets": [
+            {
+              "version": "5.0.270.1002578",
+              "versionCodes": {
+                "ARM64_V8A": 1002578,
+                "ARMEABI_V7A": 1002578,
+                "X86_64": 1002578,
+                "X86": 1002578
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Unlock premium (membership gates)",
+      "description": "Forces the remaining pro-gated feature checks on.",
+      "default": true,
+      "category": null,
+      "compatiblePackages": [
+        {
+          "packageName": "com.alightcreative.motion",
+          "name": "Alight Motion",
+          "description": "Requires the original 5.0.270.1002578 APK. Anchors are exact obfuscated descriptors from that build only.",
+          "apkFileType": "APK",
+          "appIconColor": null,
+          "signatures": null,
+          "formFactor": "MOBILE",
+          "targets": [
+            {
+              "version": "5.0.270.1002578",
+              "versionCodes": {
+                "ARM64_V8A": 1002578,
+                "ARMEABI_V7A": 1002578,
+                "X86_64": 1002578,
+                "X86": 1002578
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
     }
   ]
 }
