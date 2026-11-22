@@ -8,11 +8,14 @@ package app.morphe.patches.portdroid.pro
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.getInstruction
+import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.patch.AppTarget
 import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patcher.patch.classDefForEach
 import app.morphe.patcher.patch.mutableClassDefByOrNull
+import app.morphe.patcher.util.findMutableMethodOf
 import app.morphe.patcher.util.getReference
 import app.morphe.patches.all.shared.forceBooleanOnce
 import app.morphe.patches.portdroid.tamper.bypassTamperCheckPatch
@@ -44,43 +47,55 @@ val unlockProPatch = bytecodePatch(
     dependsOn(bypassTamperCheckPatch)
 
     execute {
-        // Gate 1: Settings.getProVersion()Z — the primary feature gate (both versions).
+        // Gate 1: Settings.getProVersion()Z — primary feature gate (both versions).
         val gpv = mutableClassDefByOrNull(SETTINGS)
             ?.methods?.singleOrNull {
                 it.name == "getProVersion" && it.returnType == "Z" && it.parameterTypes.isEmpty()
             } ?: throw PatchException("PortDroid: Settings.getProVersion()Z not found (version drift?)")
         gpv.forceBooleanOnce(true, "Settings.getProVersion")
 
-        // Gate 2: IAPStatus.proVersion field assignment. Anchor on the iput-boolean
-        // itself (signature changed 1.0.7 -> 1.3.0), force its source register to 1
-        // immediately before the store. Take the LAST hit = the effective assignment
-        // (stays correct even if another bundle injected an earlier forced iput).
-        val iap = mutableClassDefByOrNull(IAP_STATUS)
-            ?: throw PatchException("PortDroid: IAPViewModel\$IAPStatus not found")
-        val hits = mutableListOf<Pair<app.morphe.patcher.util.proxy.mutableTypes.MutableMethod, Int>>()
-        for (m in iap.methods) {
-            if (m.name != "<init>") continue
-            val impl = m.implementation ?: continue
-            impl.instructions.forEachIndexed { i, ins ->
-                if (ins.opcode == Opcode.IPUT_BOOLEAN) {
-                    val ref = ins.getReference<FieldReference>()
-                    if (ref?.definingClass == IAP_STATUS && ref.name == "proVersion") hits.add(m to i)
+        // Gate 2: force the effective IAPStatus.proVersion store to 1.
+        // Anchored on the iput-boolean itself (ctor signature changed 1.0.7 -> 1.3.0).
+        // findMutableMethodOf gives the MutableMethod receiver the instruction extensions bind to.
+        var patched = false
+        classDefForEach { classDef ->
+            if (classDef.type != IAP_STATUS) return@classDefForEach
+            val mc = mutableClassDefByOrNull(IAP_STATUS) ?: return@classDefForEach
+            classDef.methods.forEach { method ->
+                if (method.name != "<init>") return@forEach
+                val impl = method.implementation ?: return@forEach
+                val mm = mc.findMutableMethodOf(method)
+                val hits = impl.instructions.withIndex()
+                    .filter { (_, ins) ->
+                        ins.opcode == Opcode.IPUT_BOOLEAN &&
+                            ins.getReference<FieldReference>()?.let {
+                                it.definingClass == IAP_STATUS && it.name == "proVersion"
+                            } == true
+                    }
+                    .map { it.index }
+                if (hits.isEmpty()) return@forEach
+                val idx = hits.last()
+                val iput = mm.getInstruction(idx) as TwoRegisterInstruction
+                val src = iput.registerA
+                val obj = iput.registerB
+                val ref = iput.getReference<FieldReference>()
+                    ?: throw PatchException("PortDroid: proVersion iput has no field reference")
+                val prev = if (idx > 0) mm.getInstruction(idx - 1) else null
+                val already = prev is NarrowLiteralInstruction &&
+                    prev is OneRegisterInstruction &&
+                    prev.registerA == src &&
+                    prev.narrowLiteral == 1
+                if (!already) {
+                    val op = if (src < 16) "const/4" else "const/16"
+                    val iputSmali = "iput-boolean v$src, v$obj, ${ref.definingClass}->${ref.name}:${ref.type}"
+                    mm.replaceInstruction(idx, "$op v$src, 0x1")
+                    mm.addInstruction(idx + 1, iputSmali)
                 }
+                patched = true
             }
         }
-        if (hits.isEmpty()) {
+        if (!patched) {
             throw PatchException("PortDroid: IAPStatus.proVersion assignment not found (version drift?)")
-        }
-        val (m, idx) = hits.last()
-        val src = (m.getInstruction(idx) as TwoRegisterInstruction).registerA
-        val prev = if (idx > 0) m.getInstruction(idx - 1) else null
-        val already = prev is NarrowLiteralInstruction &&
-            prev is OneRegisterInstruction &&
-            prev.registerA == src &&
-            prev.narrowLiteral == 1
-        if (!already) {
-            val op = if (src < 16) "const/4" else "const/16"
-            m.addInstruction(idx, "$op v$src, 0x1")
         }
     }
 }
