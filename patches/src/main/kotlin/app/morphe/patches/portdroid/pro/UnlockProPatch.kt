@@ -74,8 +74,10 @@ val unlockProPatch = bytecodePatch(
         val (m, idx) = hits.last()
         val src = (m.getInstruction(idx) as TwoRegisterInstruction).registerA
         val prev = if (idx > 0) m.getInstruction(idx - 1) else null
-        val already = prev is NarrowLiteralInstruction && prev is OneRegisterInstruction &&
-            prev.registerA == src && prev.narrowLiteral == 1
+        val already = prev is NarrowLiteralInstruction &&
+            prev is OneRegisterInstruction &&
+            prev.registerA == src &&
+            prev.narrowLiteral == 1
         if (!already) {
             val op = if (src < 16) "const/4" else "const/16"
             m.addInstruction(idx, "$op v$src, 0x1")

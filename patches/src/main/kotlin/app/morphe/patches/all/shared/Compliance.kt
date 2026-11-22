@@ -22,9 +22,13 @@ fun MutableMethod.alreadyForcedBoolean(value: Boolean): Boolean {
     if (ins.size < 2) return false
     val a = ins[0]
     val b = ins[1]
-    return a is NarrowLiteralInstruction && a is OneRegisterInstruction &&
-        a.registerA == 0 && a.narrowLiteral == (if (value) 1 else 0) &&
-        b.opcode == Opcode.RETURN && b is OneRegisterInstruction && b.registerA == 0
+    return a is NarrowLiteralInstruction &&
+        a is OneRegisterInstruction &&
+        a.registerA == 0 &&
+        a.narrowLiteral == (if (value) 1 else 0) &&
+        b.opcode == Opcode.RETURN &&
+        b is OneRegisterInstruction &&
+        b.registerA == 0
 }
 
 /** Idempotent returnEarly: skip if another bundle already forced the same value. */
