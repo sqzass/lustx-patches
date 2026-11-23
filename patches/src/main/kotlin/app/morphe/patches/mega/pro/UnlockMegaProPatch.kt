@@ -16,7 +16,7 @@ import app.morphe.patcher.util.matchSingle
 @Suppress("unused")
 val unlockMegaProPatch = bytecodePatch(
     name = "Unlock Pro",
-    description = "Unlocks all MEGA Pro features and removes ads.",
+    description = "Unlocks all MEGA Pro features and removes ads. i'm actually not entirely sure it works - think it's jst cosmetic lol.",
 ) {
     compatibleWith(
         Compatibility(
