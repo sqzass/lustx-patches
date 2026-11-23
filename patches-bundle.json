@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-11-23T05:18:12",
-  "description": "## [1.28.0](https://github.com/sqzass/lustx-patches/compare/v1.27.0...v1.28.0) (2026-11-23)\n\n### ✨ New Features\n\n* **Ninja VPN:** add `Unlock Premium` patch for Ninja VPN ([fe483d5](https://github.com/sqzass/lustx-patches/commit/fe483d521b9e2612b4455a1ca5ebd1c56b1c4d3e))\n* rework decompile.py - smali only by default. zip output arg. yeah. ([2a387b2](https://github.com/sqzass/lustx-patches/commit/2a387b2f3661ffcf5eebb5bb119d96538a121036))\n* **SD Maid SE:** add `Unlock Donor Status` for `SD Maid SE/2`. ([f782e8e](https://github.com/sqzass/lustx-patches/commit/f782e8e53649e3a7b86c22b0e2e78189c7c2e763))\n\n### 🐛 Bug Fixes\n\n* **Ninja VPN:** removed ; that broke patching ([c74ec23](https://github.com/sqzass/lustx-patches/commit/c74ec238b272b25476c5a8b77f9095cfcaf318ab))\n* **SD Maid SE:** fix app compatiblity check ([7f64a69](https://github.com/sqzass/lustx-patches/commit/7f64a6944da93ced05c0276c14d454f871ff34ad))\n* **SD Maid SE:** im so fucking tired. ([e990302](https://github.com/sqzass/lustx-patches/commit/e9903029db29eca46a7d7079afb4d863d2e6917c))\n* **SD Maid SE:** TEEHEE ([0462b4e](https://github.com/sqzass/lustx-patches/commit/0462b4e89666ecdb7d373b242203321a979bc540))\n* **SD Maid SE:** version code and name ([be7654d](https://github.com/sqzass/lustx-patches/commit/be7654d3ebaa863d36e8a6d3b34023fb392fb1fa))",
-  "download_url": "https://github.com/sqzass/lustx-patches/releases/download/v1.28.0/patches-1.28.0.mpp",
+  "created_at": "2026-11-23T05:48:06",
+  "description": "## [1.29.0](https://github.com/sqzass/lustx-patches/compare/v1.28.0...v1.29.0) (2026-11-23)\n\n### ✨ New Features\n\n* **Turbo VPN:** add `Unlock Premium` patch for `Turbo VPN` ([90c5ce8](https://github.com/sqzass/lustx-patches/commit/90c5ce8410dd84b2201474b7c92d0ae26683f5b2))\n* **Turbo VPN:** add new patch to properly unlock premium servers ([35bd1b5](https://github.com/sqzass/lustx-patches/commit/35bd1b5df3074bb56faf01376217c172b6624c60))",
+  "download_url": "https://github.com/sqzass/lustx-patches/releases/download/v1.29.0/patches-1.29.0.mpp",
   "signature_download_url": "",
-  "version": "1.28.0"
+  "version": "1.29.0"
 }

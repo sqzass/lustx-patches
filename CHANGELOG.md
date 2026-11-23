@@ -1,3 +1,10 @@
+## [1.29.0](https://github.com/sqzass/lustx-patches/compare/v1.28.0...v1.29.0) (2026-11-23)
+
+### ✨ New Features
+
+* **Turbo VPN:** add `Unlock Premium` patch for `Turbo VPN` ([90c5ce8](https://github.com/sqzass/lustx-patches/commit/90c5ce8410dd84b2201474b7c92d0ae26683f5b2))
+* **Turbo VPN:** add new patch to properly unlock premium servers ([35bd1b5](https://github.com/sqzass/lustx-patches/commit/35bd1b5df3074bb56faf01376217c172b6624c60))
+
 ## [1.28.0](https://github.com/sqzass/lustx-patches/compare/v1.27.0...v1.28.0) (2026-11-23)
 
 ### ✨ New Features
