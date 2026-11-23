@@ -882,7 +882,7 @@
     },
     {
       "name": "Unlock Pro",
-      "description": "Unlocks all MEGA Pro features and removes ads.",
+      "description": "Unlocks all MEGA Pro features and removes ads. i'm actually not entirely sure it works - think it's jst cosmetic lol.",
       "default": true,
       "category": null,
       "compatiblePackages": [
@@ -974,6 +974,33 @@
       "options": []
     },
     {
+      "name": "Unlock Pro",
+      "description": "Unlocks SD Maid SE Pro/Donor features for FOSS build by forcing isPro checks to true",
+      "default": true,
+      "category": null,
+      "compatiblePackages": [
+        {
+          "packageName": "eu.darken.sdmse",
+          "name": "SD Maid 2/SE",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "formFactor": "MOBILE",
+          "targets": [
+            {
+              "version": "2.2.3-rc0-FOSS",
+              "versionCodes": null,
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Unlock premium",
       "description": "Unlocks Pawxy premium features (VPN servers, removes paywall and upsell badges).",
       "default": true,
@@ -998,70 +1025,6 @@
               },
               "isExperimental": false,
               "minSdk": 26,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Unlock premium (core)",
-      "description": "Forces the core account-layer membership gates on.",
-      "default": true,
-      "category": null,
-      "compatiblePackages": [
-        {
-          "packageName": "com.alightcreative.motion",
-          "name": "Alight Motion",
-          "description": "Requires the original 5.0.270.1002578 APK. Anchors are exact obfuscated descriptors from that build only.",
-          "apkFileType": "APK",
-          "appIconColor": null,
-          "signatures": null,
-          "formFactor": "MOBILE",
-          "targets": [
-            {
-              "version": "5.0.270.1002578",
-              "versionCodes": {
-                "ARM64_V8A": 1002578,
-                "ARMEABI_V7A": 1002578,
-                "X86_64": 1002578,
-                "X86": 1002578
-              },
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Unlock premium (membership gates)",
-      "description": "Forces the remaining pro-gated feature checks on.",
-      "default": true,
-      "category": null,
-      "compatiblePackages": [
-        {
-          "packageName": "com.alightcreative.motion",
-          "name": "Alight Motion",
-          "description": "Requires the original 5.0.270.1002578 APK. Anchors are exact obfuscated descriptors from that build only.",
-          "apkFileType": "APK",
-          "appIconColor": null,
-          "signatures": null,
-          "formFactor": "MOBILE",
-          "targets": [
-            {
-              "version": "5.0.270.1002578",
-              "versionCodes": {
-                "ARM64_V8A": 1002578,
-                "ARMEABI_V7A": 1002578,
-                "X86_64": 1002578,
-                "X86": 1002578
-              },
-              "isExperimental": false,
-              "minSdk": null,
               "description": null
             }
           ]

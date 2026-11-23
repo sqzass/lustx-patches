@@ -1,6 +1,14 @@
+/*
+ * Copyright 2026 sqzass.
+ *
+ * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
+ */
+
 package app.morphe.patches.sdmaidse.upgrade
 
 import app.morphe.patcher.extensions.InstructionExtensions.addInstructions
+import app.morphe.patcher.patch.AppTarget
+import app.morphe.patcher.patch.Compatibility
 import app.morphe.patcher.patch.bytecodePatch
 import app.morphe.patcher.patch.mutableClassDefBy
 
@@ -11,7 +19,15 @@ val unlockProPatch = bytecodePatch(
     name = "Unlock Donor Status",
     description = "Unlocks SD Maid SE Pro/Donor features for FOSS build by forcing isPro checks to true",
 ) {
-    compatibleWith("eu.darken.sdmse", "2.2.3-rc0-FOSS")
+    compatibleWith(
+        Compatibility(
+            name = "SD Maid 2/SE",
+            packageName = "eu.darken.sdmse",
+            targets = listOf(
+                AppTarget(version = "2.2.3-rc0-FOSS"),
+            ),
+        ),
+    )
 
     execute {
         val clazz = mutableClassDefBy(UPGRADE_EXTENSIONS)
