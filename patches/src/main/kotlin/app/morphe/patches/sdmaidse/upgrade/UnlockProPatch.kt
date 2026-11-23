@@ -24,7 +24,7 @@ val unlockProPatch = bytecodePatch(
             name = "SD Maid 2/SE",
             packageName = "eu.darken.sdmse",
             targets = listOf(
-                AppTarget(version = "2.2.3-rc0-FOSS"),
+                AppTarget(version = "2.2.3-rc0", versionCode = "20203000"),
             ),
         ),
     )
