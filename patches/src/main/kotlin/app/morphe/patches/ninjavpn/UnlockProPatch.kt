@@ -58,7 +58,7 @@ val unlockPremiumPatch = bytecodePatch(
             if (sites.isEmpty()) throw PatchException("NinjaVPN: no h.r write in $cls (version drift?)")
             for ((method, idx) in sites.sortedByDescending { it.second }) {
                 val src = (method.getInstruction(idx) as TwoRegisterInstruction).registerA
-                method.addInstruction(idx, "sget-object v$src, $PREMIUM_MODE;->PREMIUM:$PREMIUM_MODE;")
+                method.addInstruction(idx, "sget-object v$src, $PREMIUM_MODE->PREMIUM:$PREMIUM_MODE")
                 patched++
             }
         }

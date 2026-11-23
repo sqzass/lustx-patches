@@ -930,10 +930,10 @@
             {
               "version": "1.4.13",
               "versionCodes": {
-                "ARM64_V8A": 0,
-                "ARMEABI_V7A": 0,
-                "X86_64": 0,
-                "X86": 0
+                "ARM64_V8A": 50,
+                "ARMEABI_V7A": 50,
+                "X86_64": 50,
+                "X86": 50
               },
               "isExperimental": false,
               "minSdk": null,
