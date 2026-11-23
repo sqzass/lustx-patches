@@ -905,6 +905,38 @@
               },
               "isExperimental": false,
               "minSdk": null,
+              "description": "apk MUST be from GITHUB, NOT APKMirror."
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Unlock Premium",
+      "description": "Forces Ninja VPN's premium mode state to PREMIUM at every server/cache write site.",
+      "default": true,
+      "category": null,
+      "compatiblePackages": [
+        {
+          "packageName": "app.ninjavpn.android",
+          "name": "Ninja VPN",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "formFactor": "MOBILE",
+          "targets": [
+            {
+              "version": "1.4.13",
+              "versionCodes": {
+                "ARM64_V8A": 0,
+                "ARMEABI_V7A": 0,
+                "X86_64": 0,
+                "X86": 0
+              },
+              "isExperimental": false,
+              "minSdk": null,
               "description": null
             }
           ]
