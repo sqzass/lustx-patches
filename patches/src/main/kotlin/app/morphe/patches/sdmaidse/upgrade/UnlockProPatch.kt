@@ -15,17 +15,20 @@ val unlockProPatch = bytecodePatch(
 
     execute {
         val clazz = mutableClassDefBy(UPGRADE_EXTENSIONS)
-        
+
         // Patch all isPro-related methods to return Boolean.TRUE
         clazz.methods.filter { method ->
-            method.name.startsWith("isPro") && 
-            method.returnType == "Ljava/lang/Object;"
+            method.name.startsWith("isPro") &&
+                method.returnType == "Ljava/lang/Object;"
         }.forEach { method ->
             // Replace method body to immediately return Boolean.TRUE
-            method.addInstructions(0, """
+            method.addInstructions(
+                0,
+                """
                 sget-object v0, Ljava/lang/Boolean;->TRUE:Ljava/lang/Boolean;
                 return-object v0
-            """)
+            """,
+            )
         }
     }
 }
