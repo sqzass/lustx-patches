@@ -945,6 +945,38 @@
       "options": []
     },
     {
+      "name": "Unlock Premium",
+      "description": "Forces Turbo VPN's local VIP/premium state checks to true.",
+      "default": true,
+      "category": null,
+      "compatiblePackages": [
+        {
+          "packageName": "free.vpn.unblock.proxy.turbovpn",
+          "name": "Turbo VPN - Secure VPN Proxy",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "formFactor": "MOBILE",
+          "targets": [
+            {
+              "version": "4.3.2.2",
+              "versionCodes": {
+                "ARM64_V8A": 2026102111,
+                "ARMEABI_V7A": 2026102111,
+                "X86_64": 2026102111,
+                "X86": 2026102111
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
       "name": "Unlock Pro",
       "description": "Unlocks all MEGA Pro features and removes ads. i'm actually not entirely sure it works - think it's jst cosmetic lol.",
       "default": true,
@@ -1027,6 +1059,38 @@
                 "ARMEABI_V7A": 140,
                 "X86_64": 140,
                 "X86": 140
+              },
+              "isExperimental": false,
+              "minSdk": null,
+              "description": null
+            }
+          ]
+        }
+      ],
+      "options": []
+    },
+    {
+      "name": "Unlock VIP Model",
+      "description": "Forces Turbo VPN's VipInfo/VpnServer entitlement checks to premium values.",
+      "default": true,
+      "category": null,
+      "compatiblePackages": [
+        {
+          "packageName": "free.vpn.unblock.proxy.turbovpn",
+          "name": "Turbo VPN - Secure VPN Proxy",
+          "description": null,
+          "apkFileType": null,
+          "appIconColor": null,
+          "signatures": null,
+          "formFactor": "MOBILE",
+          "targets": [
+            {
+              "version": "4.3.2.2",
+              "versionCodes": {
+                "ARM64_V8A": 2026102111,
+                "ARMEABI_V7A": 2026102111,
+                "X86_64": 2026102111,
+                "X86": 2026102111
               },
               "isExperimental": false,
               "minSdk": null,
