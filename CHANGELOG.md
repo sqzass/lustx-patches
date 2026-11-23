@@ -1,3 +1,19 @@
+## [1.28.0](https://github.com/sqzass/lustx-patches/compare/v1.27.0...v1.28.0) (2026-11-23)
+
+### ✨ New Features
+
+* **Ninja VPN:** add `Unlock Premium` patch for Ninja VPN ([fe483d5](https://github.com/sqzass/lustx-patches/commit/fe483d521b9e2612b4455a1ca5ebd1c56b1c4d3e))
+* rework decompile.py - smali only by default. zip output arg. yeah. ([2a387b2](https://github.com/sqzass/lustx-patches/commit/2a387b2f3661ffcf5eebb5bb119d96538a121036))
+* **SD Maid SE:** add `Unlock Donor Status` for `SD Maid SE/2`. ([f782e8e](https://github.com/sqzass/lustx-patches/commit/f782e8e53649e3a7b86c22b0e2e78189c7c2e763))
+
+### 🐛 Bug Fixes
+
+* **Ninja VPN:** removed ; that broke patching ([c74ec23](https://github.com/sqzass/lustx-patches/commit/c74ec238b272b25476c5a8b77f9095cfcaf318ab))
+* **SD Maid SE:** fix app compatiblity check ([7f64a69](https://github.com/sqzass/lustx-patches/commit/7f64a6944da93ced05c0276c14d454f871ff34ad))
+* **SD Maid SE:** im so fucking tired. ([e990302](https://github.com/sqzass/lustx-patches/commit/e9903029db29eca46a7d7079afb4d863d2e6917c))
+* **SD Maid SE:** TEEHEE ([0462b4e](https://github.com/sqzass/lustx-patches/commit/0462b4e89666ecdb7d373b242203321a979bc540))
+* **SD Maid SE:** version code and name ([be7654d](https://github.com/sqzass/lustx-patches/commit/be7654d3ebaa863d36e8a6d3b34023fb392fb1fa))
+
 ## [1.27.0](https://github.com/sqzass/lustx-patches/compare/v1.26.0...v1.27.0) (2026-11-22)
 
 ### ✨ New Features
