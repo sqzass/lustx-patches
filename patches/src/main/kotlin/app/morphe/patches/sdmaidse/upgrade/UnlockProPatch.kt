@@ -24,7 +24,7 @@ val unlockProPatch = bytecodePatch(
             name = "SD Maid 2/SE",
             packageName = "eu.darken.sdmse",
             targets = listOf(
-                AppTarget(version = "2.2.3-rc0", versionCode = 20203000),
+                AppTarget(version = "2.2.3-rc0", versionCode = 20203000, description = "apk MUST be from GITHUB, NOT APKMirror."),
             ),
         ),
     )
