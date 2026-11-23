@@ -1,3 +1,9 @@
+## [1.29.1](https://github.com/sqzass/lustx-patches/compare/v1.29.0...v1.29.1) (2026-11-23)
+
+### 🐛 Bug Fixes
+
+* **Ninja VPN:** disclaimer for servers ([e9b4e8f](https://github.com/sqzass/lustx-patches/commit/e9b4e8fec0b31db04123229efbebd858919e2de1))
+
 ## [1.29.0](https://github.com/sqzass/lustx-patches/compare/v1.28.0...v1.29.0) (2026-11-23)
 
 ### ✨ New Features

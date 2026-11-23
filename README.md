@@ -30,7 +30,7 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.29.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.29.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;38 patches total
+> **[v1.29.1](https://github.com/sqzass/lustx-patches/releases/tag/v1.29.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;36 patches total
 <details>
 <summary>📦 PortDroid - Network Analysis&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
@@ -106,23 +106,7 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
-| [Unlock Premium](#unlock-premium) | Forces Ninja VPN's premium mode state to PREMIUM at every server/cache write site. |  |
-
-</details>
-
-<details>
-<summary>📦 Turbo VPN - Secure VPN Proxy&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
-<br>
-
-**🎯 Supported versions:**
-
-| 4.3.2.2 |
-| :---: |
-
-| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
-|----------|----------------|-----------|
-| [Unlock Premium](#unlock-premium) | Forces Turbo VPN's local VIP/premium state checks to true. |  |
-| [Unlock VIP Model](#unlock-vip-model) | Forces Turbo VPN's VipInfo/VpnServer entitlement checks to premium values. |  |
+| [Unlock Premium](#unlock-premium) | Forces Ninja VPN's premium mode state to PREMIUM at every server/cache write site. only some servers work (defaults to US if it doesn't). |  |
 
 </details>
 
