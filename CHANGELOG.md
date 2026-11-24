@@ -1,3 +1,14 @@
+## [1.30.0](https://github.com/sqzass/lustx-patches/compare/v1.29.1...v1.30.0) (2026-11-24)
+
+### ✨ New Features
+
+* add Patch Request template ([702898a](https://github.com/sqzass/lustx-patches/commit/702898a7e16fd3cfcbfceff231901f892973ff52))
+* **Super VPN:** add `Unlock Premium` patch for Super Unlimted VPN Pro Plus Max SomethingSOmething ([52fb231](https://github.com/sqzass/lustx-patches/commit/52fb23103d0255b1274e2090247ef01478f7ea1b))
+
+### 🐛 Bug Fixes
+
+* **SD Maid SE:** actually unlock premium ([e891eb6](https://github.com/sqzass/lustx-patches/commit/e891eb6d974c602c4d126423b7d86322f7c2f61a))
+
 ## [1.29.1](https://github.com/sqzass/lustx-patches/compare/v1.29.0...v1.29.1) (2026-11-23)
 
 ### 🐛 Bug Fixes

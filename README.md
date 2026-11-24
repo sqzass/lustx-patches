@@ -30,7 +30,7 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.29.1](https://github.com/sqzass/lustx-patches/releases/tag/v1.29.1)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;36 patches total
+> **[v1.30.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.30.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;37 patches total
 <details>
 <summary>📦 PortDroid - Network Analysis&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
@@ -80,22 +80,6 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 </details>
 
 <details>
-<summary>📦 SD Maid 2/SE&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
-<br>
-
-**🎯 Supported versions:**
-
-| 2.2.3-rc0 |
-| :---: |
-| apk MUST be from GITHUB, NOT APKMirror. |
-
-| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
-|----------|----------------|-----------|
-| [Unlock Donor Status](#unlock-donor-status) | Unlocks SD Maid SE Pro/Donor features for FOSS build by forcing isPro checks to true |  |
-
-</details>
-
-<details>
 <summary>📦 Ninja VPN&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
 
@@ -111,6 +95,21 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 </details>
 
 <details>
+<summary>📦 VPN - Super Unlimited Proxy&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 2.37.0 |
+| :---: |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Unlock Premium](#unlock-premium) | Forces Super VPN VIP state, premium UserInfo state, disables promo banners, and suppresses crown/privacy/TV paywall triggers. |  |
+
+</details>
+
+<details>
 <summary>📦 MEGA&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
 <br>
 
@@ -122,6 +121,22 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 | 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
 |----------|----------------|-----------|
 | [Unlock Pro](#unlock-pro) | Unlocks all MEGA Pro features and removes ads. i'm actually not entirely sure it works - think it's jst cosmetic lol. | • Pro tier |
+
+</details>
+
+<details>
+<summary>📦 SD Maid 2/SE&nbsp;&nbsp;•&nbsp;&nbsp;1 patch</summary>
+<br>
+
+**🎯 Supported versions:**
+
+| 2.2.3-rc0 |
+| :---: |
+| GitHub build, not APKMirror. |
+
+| 💊&nbsp;Patch | 📜&nbsp;Description | ⚙️&nbsp;Options |
+|----------|----------------|-----------|
+| [Unlock Pro](#unlock-pro) | Forces SD Maid SE FOSS upgrade state to Pro. |  |
 
 </details>
 
