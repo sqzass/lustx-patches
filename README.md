@@ -1,3 +1,7 @@
+# NEXT UP
+
+- Proton VPN
+
 # 🧩 Lustx Patches
 
 > Custom patches for [Morphe](https://morphe.software) - mostly universal, some per-app - by [sqzass](https://github.com/sqzass).
