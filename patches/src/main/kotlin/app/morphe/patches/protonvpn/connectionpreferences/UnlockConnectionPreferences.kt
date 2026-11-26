@@ -1,10 +1,6 @@
 /*
  * Copyright 2026 sqzass.
  * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
- *
- * Based on hxreborn/morphe-patches (protonvpn/misc/connectionpreferences/UnlockConnectionPreferencesPatch.kt).
- * Phase 2A: steps 1-9 + 12-13. The exclusion-respecting server-picking logic
- * (steps 10-11, requires ExcludedLocations helper) is deferred to Phase 2B.
  */
 
 package app.morphe.patches.protonvpn.connectionpreferences
@@ -54,9 +50,8 @@ internal fun unlockConnectionPreferences() {
     clearFreeUserCheck(removeExcludedLocationFingerprint())
     clearFreeUserCheck(excludedLocationsFlowFingerprint())
 
-    // ── Phase 2B: exclusion-aware server selection ──
-    injectExcludedLocationsHelper() // injects field + methods on ServerManager
-    wireBestServerExclusionCheck() // hook into best-server connect path
+    injectExcludedLocationsHelper()
+    wireBestServerExclusionCheck()
 
     val connectionCardLabel = connectionCardLabelFingerprint()
     if (connectionCardLabel.matchOrNull() != null) {
@@ -80,8 +75,6 @@ internal fun unlockConnectionPreferences() {
 
     println("[protonvpn] connectionpreferences: unlocked (incl. exclusion filtering)")
 }
-
-// ── Local helpers (not exported) ──────────────────────────────────────────────
 
 private fun clearRecentsRecordingFreeUserCheck() {
     val method = recentsRecordingFingerprint().method

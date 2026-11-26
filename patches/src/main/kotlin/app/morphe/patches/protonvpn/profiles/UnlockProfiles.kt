@@ -26,22 +26,17 @@ import app.morphe.patches.protonvpn.shared.restrictions.invertFreeServerCheckFor
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 
 internal fun unlockProfiles() {
-    // Ensure shared infrastructure is present (idempotent — safe if ShowFreeServerLocations ran first).
     injectFreeServerInfrastructure()
     injectProfilesInfrastructure()
 
-    // 1. Availability check: disable free-user gate
     clearFreeUserCheck(profileAvailabilityFingerprint())
 
-    // 2. VPN countries list: filter to countries containing at least one free server
     vpnCountriesFingerprint().method.filterReturnValue(
         "$SERVER_MANAGER->hxCountriesForAccount(Ljava/util/List;)Ljava/util/List;",
     )
 
-    // 3. Profile server filter: invert isFreeServer for free users
     invertFreeServerCheckForFreeAccount(profileServerFilterFingerprint())
 
-    // 4. Per-country server list: filter to free servers
     profileCitiesOrStatesFingerprint().match().run {
         val serverList = instructionMatches.last()
         val register = serverList.getInstruction<OneRegisterInstruction>().registerA
@@ -54,14 +49,12 @@ internal fun unlockProfiles() {
         )
     }
 
-    // 5. Profiles list: drop UNAVAILABLE_PLAN entries
     filterConstructorProperty(
         ProfilesListToStringFingerprint,
         "profiles",
         "$SERVER_MANAGER->hxProfilesForAccount(Ljava/util/List;)Ljava/util/List;",
     )
 
-    // 6. Profile type buttons: keep only Standard
     profileTypesToStringFingerprints.forEach {
         filterConstructorProperty(
             it,

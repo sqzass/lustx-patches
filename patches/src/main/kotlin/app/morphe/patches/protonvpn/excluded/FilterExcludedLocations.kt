@@ -2,13 +2,7 @@
  * Copyright 2026 sqzass.
  * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
  *
- * Recon-verified against Proton VPN 5.21.57.0 (Play, installed build):
- *   ServerManager->f(Z)Ljava/util/List;
- *   -> returns Lsl/s;->c or Lsl/s;->d
- *   -> excluded-locations picker country list
- *
- * This wraps both RETURN_OBJECT sites with the already-verified
- * hxCountriesForAccount helper injected by ProfilesHost.
+ * Wraps both return sites in ServerManager.f(Z) with hxCountriesForAccount().
  */
 
 package app.morphe.patches.protonvpn.excluded
@@ -19,7 +13,7 @@ import app.morphe.patcher.extensions.InstructionExtensions.instructions
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patches.protonvpn.shared.helpers.injectProfilesInfrastructure
 import com.android.tools.smali.dexlib2.Opcode
-import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
+import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 
 private const val SERVER_MANAGER = "Lcom/protonvpn/android/utils/ServerManager;"
 
@@ -36,29 +30,36 @@ internal fun filterExcludedLocations() {
     val method = ServerManagerFZingerprint.match().method
     val insns = method.instructions.toList()
 
-    val returnIndices = insns.indices.filter { i ->
-        insns[i].opcode == Opcode.RETURN_OBJECT
-    }
-
-    if (returnIndices.size != 2) {
+    val returns = insns.indices.filter { insns[it].opcode == Opcode.RETURN_OBJECT }
+    if (returns.size != 2) {
         throw PatchException(
-            "ProtonVPN: expected 2 return-object in ServerManager.f(Z), found ${returnIndices.size}",
+            "ProtonVPN: expected 2 return-object sites in ServerManager.f(Z), found ${returns.size}",
         )
     }
 
-    // Insert backwards so earlier return indices are not shifted by later insertions.
-    for (returnIdx in returnIndices.sortedDescending()) {
-        val prev = insns[returnIdx - 1]
-        if (prev.opcode != Opcode.MOVE_RESULT_OBJECT) continue
+    var wrapped = 0
 
-        val reg = (prev as OneRegisterInstruction).registerA
+    for (returnIndex in returns.sortedDescending()) {
+        val load = insns[returnIndex - 1]
+        if (load.opcode != Opcode.IGET_OBJECT) {
+            throw PatchException(
+                "ProtonVPN: expected iget-object before return-object at $returnIndex in ServerManager.f(Z)",
+            )
+        }
+
+        val listReg = (load as TwoRegisterInstruction).registerA
 
         method.addInstruction(
-            returnIdx,
-            "invoke-static { v$reg }, $SERVER_MANAGER->hxCountriesForAccount(Ljava/util/List;)Ljava/util/List;",
+            returnIndex,
+            "invoke-static { v$listReg }, $SERVER_MANAGER->hxCountriesForAccount(Ljava/util/List;)Ljava/util/List;",
         )
-        method.addInstruction(returnIdx + 1, "move-result-object v$reg")
+        method.addInstruction(returnIndex + 1, "move-result-object v$listReg")
+        wrapped++
     }
 
-    println("[protonvpn] excluded: filtered ServerManager.f(Z) to free countries only")
+    if (wrapped != 2) {
+        throw PatchException("ProtonVPN: failed to wrap both ServerManager.f(Z) returns, wrapped=$wrapped")
+    }
+
+    println("[protonvpn] excluded: wrapped 2 return sites in ServerManager.f(Z)")
 }
