@@ -1,7 +1,3 @@
-# NEXT UP
-
-- Proton VPN
-
 # 🧩 Lustx Patches
 
 > Custom patches for [Morphe](https://morphe.software) - mostly universal, some per-app - by [sqzass](https://github.com/sqzass).
@@ -9,6 +5,18 @@
 ## About
 
 A grab-bag of patches for apps I actually use... mostly. Most of it is universal patches that work across a bunch of apps, with a few app-specific ones thrown in.
+
+## Up Next
+
+Below will contain apps that I plan on trying to get patched. If empty, you can just assume there's nothing on my mind.
+
+### Moises
+
+- Unlock Premium
+
+### Telegram
+
+- basically what every other repo has added so far
 
 ## Get started
 
