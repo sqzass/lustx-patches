@@ -7,6 +7,7 @@ package app.morphe.patches.protonvpn.luxu
 
 import app.morphe.patcher.patch.booleanOption
 import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patches.protonvpn.accelerator.unlockVpnAccelerator
 import app.morphe.patches.protonvpn.connectionpreferences.unlockConnectionPreferences
 import app.morphe.patches.protonvpn.customdns.unlockCustomDns
 import app.morphe.patches.protonvpn.lan.unlockLanConnections
@@ -62,6 +63,14 @@ val unlockFeaturesPatch = bytecodePatch(
         description = "Unlocks profiles on free plans and limits them to free locations.",
     )
 
+    val vpnAcceleratorOption = booleanOption(
+        key = "unlockVpnAccelerator",
+        default = true,
+        title = "Unlock VPN Accelerator",
+        description = "Unlocks VPN Accelerator on free plans (enables the split-tcp connection feature). " +
+            "Actual speed gain depends on the server honoring it.",
+    )
+
     execute {
         if (lanOption.value == true) unlockLanConnections()
         if (netShieldOption.value == true) unlockNetShield()
@@ -69,5 +78,6 @@ val unlockFeaturesPatch = bytecodePatch(
         if (splitTunnelingOption.value == true) unlockSplitTunneling()
         if (connectionPreferencesOption.value == true) unlockConnectionPreferences()
         if (profilesOption.value == true) unlockProfiles()
+        if (vpnAcceleratorOption.value == true) unlockVpnAccelerator()
     }
 }
