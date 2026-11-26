@@ -2,14 +2,6 @@
  * Copyright 2026 sqzass.
  * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
  *
- * Recon-verified against Proton VPN 5.21.57.0 (Play, installed build):
- *   Lcom/protonvpn/android/settings/data/LocalUserSettings;->getRandomizedNat()Z
- *   -> Lil/j3;->invokeSuspend (single call site, smali line 2622)
- *   row:  invoke-direct/range {v24..v30}, Lil/n2;-><init>(Ljava/io/Serializable;ZILil/d;Ljava/lang/Integer;I)V
- *         v26 = Z (restricted) param, fed by move/from16 v26, v13 three instructions before the ctor.
- *   v26 is dead after the ctor (verified: zero references past smali line 2740),
- *   so the move/from16 is replaced in-place with const/4 v26, 0x0.
- *   Title const 0x7f1305e2 + description const 0x7f1305da uniquely pin this n2 call.
  */
 
 package app.morphe.patches.protonvpn.nat
