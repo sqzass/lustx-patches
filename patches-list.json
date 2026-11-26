@@ -688,6 +688,15 @@
           "type": "kotlin.Boolean",
           "default": true,
           "values": null
+        },
+        {
+          "key": "unlockVpnAccelerator",
+          "title": "Unlock VPN Accelerator",
+          "description": "Unlocks VPN Accelerator on free plans (enables the split-tcp connection feature). Actual speed gain depends on the server honoring it.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": true,
+          "values": null
         }
       ]
     },
@@ -1539,38 +1548,6 @@
               "isExperimental": false,
               "minSdk": null,
               "description": "GitHub build, not APKMirror."
-            }
-          ]
-        }
-      ],
-      "options": []
-    },
-    {
-      "name": "Unlock VPN Accelerator",
-      "description": "Unlocks VPN Accelerator on free plans (split-tcp connection feature).",
-      "default": true,
-      "category": null,
-      "compatiblePackages": [
-        {
-          "packageName": "ch.protonvpn.android",
-          "name": "Proton VPN",
-          "description": null,
-          "apkFileType": null,
-          "appIconColor": null,
-          "signatures": null,
-          "formFactor": "MOBILE",
-          "targets": [
-            {
-              "version": "5.21.57.0",
-              "versionCodes": {
-                "ARM64_V8A": 605215700,
-                "ARMEABI_V7A": 605215700,
-                "X86_64": 605215700,
-                "X86": 605215700
-              },
-              "isExperimental": false,
-              "minSdk": null,
-              "description": null
             }
           ]
         }

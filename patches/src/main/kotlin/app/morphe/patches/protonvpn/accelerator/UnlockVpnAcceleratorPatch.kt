@@ -2,19 +2,11 @@
  * Copyright 2026 sqzass.
  * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
  *
- * Recon-verified against Proton VPN 5.21.57.0 (Play, installed build):
- *   Lcom/protonvpn/android/settings/data/LocalUserSettings;->getVpnAccelerator()Z
- *   -> smali_classes2/il/j3.smali invokeSuspend (.locals 45)
- *   gate: move-result vN ; if-eqz vN ; if-nez v26   (v26 = restriction flag)
- *   row:  invoke-direct/range {v24..v30}, Lil/n2;-><init>(Ljava/lang/Object;ZILil/d;Ljava/lang/Integer;Ljava/lang/Integer;)V
- *   v26 is live after the row (saved into v13 for the Lil/k2; split-tunneling ctor),
- *   so it is stashed in an unused high register and restored after the n2 ctor.
  */
 
 package app.morphe.patches.protonvpn.accelerator
 
 import app.morphe.patcher.Fingerprint
-import app.morphe.patcher.InstructionLocation.MatchAfterImmediately
 import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.instructions
 import app.morphe.patcher.methodCall
@@ -35,7 +27,6 @@ private object VpnAcceleratorGateFingerprint : Fingerprint(
         methodCall(
             definingClass = LOCAL_USER_SETTINGS,
             name = "getVpnAccelerator",
-            location = MatchAfterImmediately(),
         ),
     ),
 )
