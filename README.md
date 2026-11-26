@@ -17,6 +17,35 @@ Below will contain apps that I plan on trying to get patched. If empty, you can 
 ### Telegram
 
 - basically what every other repo has added so far
+- Lustx custom themes (not so sure about this one)
+
+### SoundCloud
+
+- Unlock SoundCloud Go
+- Change Primary Color (default 2 AMOLED black)
+- Change Accent Color (swap out that SC orange)
+
+### Audiomack
+
+- Premium unlock (offline listening, no ads, hi-fi toggle)
+- Change Primary Color (default 2 AMOLED black)
+- Change Accent Color (swap out that orange)
+
+### Deezer
+
+- Force Premium Tier
+- Disable Upsell Screens
+
+### Discord
+
+#### huge shoutout to Venus, i will probably end up forking their work (if license allows). code will credit where due.
+
+still deciding. Asscord? Lustcord? Xcord? Luxcord?
+
+### MacroDroid
+
+- Unlock Premium
+- Restore Marketplace (most the time disables depending on build)
 
 ## Get started
 
