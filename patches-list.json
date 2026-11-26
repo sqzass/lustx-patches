@@ -697,6 +697,24 @@
           "type": "kotlin.Boolean",
           "default": true,
           "values": null
+        },
+        {
+          "key": "unlockNat",
+          "title": "Unlock NAT type",
+          "description": "Unlocks NAT type selection on free plans (randomized NAT feature).",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": true,
+          "values": null
+        },
+        {
+          "key": "filterExcludedLocations",
+          "title": "Filter excluded locations",
+          "description": "Shows only free locations in the excluded locations picker.",
+          "required": false,
+          "type": "kotlin.Boolean",
+          "default": true,
+          "values": null
         }
       ]
     },
