@@ -1,3 +1,19 @@
+## [1.32.0](https://github.com/sqzass/lustx-patches/compare/v1.31.0...v1.32.0) (2026-11-26)
+
+### ✨ New Features
+
+* **Proton VPN:** add `Unlock NAT Type` patch to Luxu ([d1bf2cb](https://github.com/sqzass/lustx-patches/commit/d1bf2cb3764691dcd6d3637d68b630263678637a))
+* **Proton VPN:** add `Unlock VPN Accelerator` patch to Lustx Unlocks ([cfdb95a](https://github.com/sqzass/lustx-patches/commit/cfdb95a8f4f68feb4124b0020e38dde0d37e9990))
+* **Proton VPN:** add shared helpers and fix excluded locations from showing non-free servers ([f16a2cb](https://github.com/sqzass/lustx-patches/commit/f16a2cb3f90d5f2b127ef6cec8cf2abe929eecb6))
+
+### 🐛 Bug Fixes
+
+* ci.sh ([58d9a61](https://github.com/sqzass/lustx-patches/commit/58d9a616418684c48a02fee0cdd24a758f2f1b16))
+* **Proton VPN:** fix fingerprint on the accelerator patch ([c2e1885](https://github.com/sqzass/lustx-patches/commit/c2e1885d789d7c447eda439db154aee073fea2dd))
+* **Proton VPN:** fixed unlock nat type so it doesnt fail patching ([48f35cd](https://github.com/sqzass/lustx-patches/commit/48f35cd51805a1416441a782337a597b976fb446))
+* **Proton VPN:** ok i lied this time it's (accl) actually fixed ([4fbe013](https://github.com/sqzass/lustx-patches/commit/4fbe013a66467a165f614180f5e2b0cf81fa70ca))
+* **Proton VPN:** vee pee in ([49b8f4d](https://github.com/sqzass/lustx-patches/commit/49b8f4d9dd4a27d9a3f37190b04ccb98f77ff08f))
+
 ## [1.31.0](https://github.com/sqzass/lustx-patches/compare/v1.30.0...v1.31.0) (2026-11-25)
 
 ### ✨ New Features

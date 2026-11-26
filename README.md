@@ -71,7 +71,7 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 ## 🩹 Patches list
 
 <!-- PATCHES_START -->
-> **[v1.31.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.31.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;49 patches total
+> **[v1.32.0](https://github.com/sqzass/lustx-patches/releases/tag/v1.32.0)**&nbsp;&nbsp;•&nbsp;&nbsp;`main`&nbsp;&nbsp;•&nbsp;&nbsp;49 patches total
 <details>
 <summary>📦 PortDroid - Network Analysis&nbsp;&nbsp;•&nbsp;&nbsp;2 patches</summary>
 <br>
@@ -102,7 +102,7 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 | [Change App Icon](#change-app-icon) | Custom PNG icons + labels for the spoofed Calculator / Notes / Weather slots. Real Proton logos are never touched. | • All three: icon<br>• All three: label<br>• Calculator icon (override)<br>• Calculator label (override)<br>• Notes icon (override)<br>• Notes label (override)<br>• Weather icon (override)<br>• Weather label (override)<br>• Flat fallback<br>• Restore in-app name |
 | [Disable Telemetry](#disable-telemetry) | Forces the observability feature flag off and short-circuits telemetry enqueue, upload, and the payments observability worker. |  |
 | [Hide Upgrade Promotions](#hide-upgrade-promotions) | Kills the upgrade dialog, plan congrats screen, and promo offer activity on launch. |  |
-| [Lustx Unlocks](#lustx-unlocks) | Unlocks premium features on free plans. Each feature can be toggled individually. | • Unlock LAN connections<br>• Unlock NetShield<br>• Unlock custom DNS<br>• Unlock split tunneling<br>• Unlock connection preferences<br>• Unlock profiles |
+| [Lustx Unlocks](#lustx-unlocks) | Unlocks premium features on free plans. Each feature can be toggled individually. | • Unlock LAN connections<br>• Unlock NetShield<br>• Unlock custom DNS<br>• Unlock split tunneling<br>• Unlock connection preferences<br>• Unlock profiles<br>• Unlock VPN Accelerator<br>• Unlock NAT type<br>• Filter excluded locations |
 | [Remove Server Change Delay](#remove-server-change-delay) | Removes the cooldown timer when switching between free servers. |  |
 | [Show Free Server Locations](#show-free-server-locations) | Shows free server locations in the Countries list and Search, and connects to them on free plans. Paid servers stay hidden and locked. |  |
 
@@ -122,7 +122,7 @@ Note: anything you put in `apks/` gets processed and deleted once it's done. Not
 | [Change App Icon](#change-app-icon) | Custom PNG icons + labels for the spoofed Calculator / Notes / Weather slots. Real Proton logos are never touched. | • All three: icon<br>• All three: label<br>• Calculator icon (override)<br>• Calculator label (override)<br>• Notes icon (override)<br>• Notes label (override)<br>• Weather icon (override)<br>• Weather label (override)<br>• Flat fallback<br>• Restore in-app name |
 | [Disable Telemetry](#disable-telemetry) | Forces the observability feature flag off and short-circuits telemetry enqueue, upload, and the payments observability worker. |  |
 | [Hide Upgrade Promotions](#hide-upgrade-promotions) | Kills the upgrade dialog, plan congrats screen, and promo offer activity on launch. |  |
-| [Lustx Unlocks](#lustx-unlocks) | Unlocks premium features on free plans. Each feature can be toggled individually. | • Unlock LAN connections<br>• Unlock NetShield<br>• Unlock custom DNS<br>• Unlock split tunneling<br>• Unlock connection preferences<br>• Unlock profiles |
+| [Lustx Unlocks](#lustx-unlocks) | Unlocks premium features on free plans. Each feature can be toggled individually. | • Unlock LAN connections<br>• Unlock NetShield<br>• Unlock custom DNS<br>• Unlock split tunneling<br>• Unlock connection preferences<br>• Unlock profiles<br>• Unlock VPN Accelerator<br>• Unlock NAT type<br>• Filter excluded locations |
 | [Remove Server Change Delay](#remove-server-change-delay) | Removes the cooldown timer when switching between free servers. |  |
 | [Show Free Server Locations](#show-free-server-locations) | Shows free server locations in the Countries list and Search, and connects to them on free plans. Paid servers stay hidden and locked. |  |
 
