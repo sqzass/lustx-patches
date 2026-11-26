@@ -115,7 +115,7 @@ internal fun injectFreeServerInfrastructure() {
         """,
     )
 
-    // hxIsFreeServer(Object) → Z — 2 registers (new in 3C: needed by profile helpers)
+    // hxIsFreeServer(Object) → Z — 2 registers
     val freeServer = freeServerMethod
     sm.addStaticMethod(
         "hxIsFreeServer",

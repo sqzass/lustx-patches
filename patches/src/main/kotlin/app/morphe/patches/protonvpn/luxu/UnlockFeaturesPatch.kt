@@ -7,9 +7,12 @@ package app.morphe.patches.protonvpn.luxu
 
 import app.morphe.patcher.patch.booleanOption
 import app.morphe.patcher.patch.bytecodePatch
+import app.morphe.patches.protonvpn.accelerator.unlockVpnAccelerator
 import app.morphe.patches.protonvpn.connectionpreferences.unlockConnectionPreferences
 import app.morphe.patches.protonvpn.customdns.unlockCustomDns
+import app.morphe.patches.protonvpn.excluded.filterExcludedLocations
 import app.morphe.patches.protonvpn.lan.unlockLanConnections
+import app.morphe.patches.protonvpn.nat.unlockNatType
 import app.morphe.patches.protonvpn.netshield.unlockNetShield
 import app.morphe.patches.protonvpn.profiles.unlockProfiles
 import app.morphe.patches.protonvpn.shared.PROTON_VPN
@@ -62,6 +65,28 @@ val unlockFeaturesPatch = bytecodePatch(
         description = "Unlocks profiles on free plans and limits them to free locations.",
     )
 
+    val vpnAcceleratorOption = booleanOption(
+        key = "unlockVpnAccelerator",
+        default = true,
+        title = "Unlock VPN Accelerator",
+        description = "Unlocks VPN Accelerator on free plans (enables the split-tcp connection feature). " +
+            "Actual speed gain depends on the server honoring it.",
+    )
+
+    val natOption = booleanOption(
+        key = "unlockNat",
+        default = true,
+        title = "Unlock NAT type",
+        description = "Unlocks NAT type selection on free plans (randomized NAT feature).",
+    )
+
+    val excludedLocationsOption = booleanOption(
+        key = "filterExcludedLocations",
+        default = true,
+        title = "Filter excluded locations",
+        description = "Shows only free locations in the excluded locations picker.",
+    )
+
     execute {
         if (lanOption.value == true) unlockLanConnections()
         if (netShieldOption.value == true) unlockNetShield()
@@ -69,5 +94,8 @@ val unlockFeaturesPatch = bytecodePatch(
         if (splitTunnelingOption.value == true) unlockSplitTunneling()
         if (connectionPreferencesOption.value == true) unlockConnectionPreferences()
         if (profilesOption.value == true) unlockProfiles()
+        if (vpnAcceleratorOption.value == true) unlockVpnAccelerator()
+        if (natOption.value == true) unlockNatType()
+        if (excludedLocationsOption.value == true) filterExcludedLocations()
     }
 }

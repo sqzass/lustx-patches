@@ -1,7 +1,3 @@
-# NEXT UP
-
-- Proton VPN
-
 # 🧩 Lustx Patches
 
 > Custom patches for [Morphe](https://morphe.software) - mostly universal, some per-app - by [sqzass](https://github.com/sqzass).
@@ -9,6 +5,47 @@
 ## About
 
 A grab-bag of patches for apps I actually use... mostly. Most of it is universal patches that work across a bunch of apps, with a few app-specific ones thrown in.
+
+## Up Next
+
+Below will contain apps that I plan on trying to get patched. If empty, you can just assume there's nothing on my mind.
+
+### Moises
+
+- Unlock Premium
+
+### Telegram
+
+- basically what every other repo has added so far
+- Lustx custom themes (not so sure about this one)
+
+### SoundCloud
+
+- Unlock SoundCloud Go
+- Change Primary Color (default 2 AMOLED black)
+- Change Accent Color (swap out that SC orange)
+
+### Audiomack
+
+- Premium unlock (offline listening, no ads, hi-fi toggle)
+- Change Primary Color (default 2 AMOLED black)
+- Change Accent Color (swap out that orange)
+
+### Deezer
+
+- Force Premium Tier
+- Disable Upsell Screens
+
+### Discord
+
+#### huge shoutout to Venus, i will probably end up forking their work (if license allows). code will credit where due.
+
+still deciding. Asscord? Lustcord? Xcord? Luxcord?
+
+### MacroDroid
+
+- Unlock Premium
+- Restore Marketplace (most the time disables depending on build)
 
 ## Get started
 
