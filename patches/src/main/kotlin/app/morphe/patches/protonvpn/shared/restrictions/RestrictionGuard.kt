@@ -17,7 +17,14 @@ import app.morphe.patcher.methodCall
 import app.morphe.patcher.opcode
 import app.morphe.patcher.patch.PatchException
 import app.morphe.patcher.util.getReference
+<<<<<<< Updated upstream:patches/src/main/kotlin/app/morphe/patches/protonvpn/shared/restrictions/RestrictionGuard.kt
 import app.morphe.patches.protonvpn.shared.anchors.vpnUserType
+=======
+import app.morphe.patcher.util.matchSingle
+
+private const val LOCAL_USER_SETTINGS = "Lcom/protonvpn/android/settings/data/LocalUserSettings;"
+import app.sqzass.patches.protonvpn.misc.anchors.vpnUserType
+>>>>>>> Stashed changes:patches/src/main/kotlin/app/sqzass/patches/protonvpn/misc/restrictions/RestrictionGuard.kt
 import app.morphe.util.indexOfFirstInstructionOrThrow
 import com.android.tools.smali.dexlib2.Opcode
 import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
@@ -26,8 +33,11 @@ import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
+<<<<<<< Updated upstream:patches/src/main/kotlin/app/morphe/patches/protonvpn/shared/restrictions/RestrictionGuard.kt
 internal const val LOCAL_USER_SETTINGS =
     "Lcom/protonvpn/android/settings/data/LocalUserSettings;"
+=======
+>>>>>>> Stashed changes:patches/src/main/kotlin/app/sqzass/patches/protonvpn/misc/restrictions/RestrictionGuard.kt
 
 internal fun restrictionGuardFingerprint(settingGetter: String): Fingerprint {
     val vpnUser = vpnUserType
@@ -43,7 +53,7 @@ internal fun restrictionGuardFingerprint(settingGetter: String): Fingerprint {
         ),
         custom = { method, _ ->
             method.parameterTypes.firstOrNull()?.toString() == LOCAL_USER_SETTINGS &&
-                method.parameterTypes.any { it.toString() == vpnUser }
+                method.parameters.any { it.toString() == vpnUser }
         },
     )
 }
