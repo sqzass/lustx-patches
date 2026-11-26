@@ -77,7 +77,6 @@ val disableTelemetryPatch = bytecodePatch(
     compatibleWith(PROTON_VPN, PROTON_VPN_FOSS)
 
     execute {
-        // R8 merges kotlin.Unit into an obfuscated class; resolve it instead of pinning.
         val unitClasses = KotlinUnitToStringFingerprint.matchAll()
             .map { it.originalClassDef }
             .distinctBy { it.type }
@@ -98,7 +97,6 @@ val disableTelemetryPatch = bytecodePatch(
             return-object p0
         """.trimIndent()
 
-        // 1. Force core_feature_observability_enabled to false at every read site.
         var flagSites = 0
 
         ObservabilityEnabledFingerprint.matchAll().forEach { match ->
@@ -118,7 +116,6 @@ val disableTelemetryPatch = bytecodePatch(
             )
         }
 
-        // 2-5. Short-circuit the suspend pipelines to Unit.
         VpnTelemetryEventFingerprint.match().method.addInstructions(0, returnUnit)
         CoreTelemetryEnqueueFingerprint.match().method.addInstructions(0, returnUnit)
         ObservabilityUploadFingerprint.match().method.addInstructions(0, returnUnit)
