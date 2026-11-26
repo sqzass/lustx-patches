@@ -2,26 +2,32 @@
  * Copyright 2026 sqzass.
  * See the included NOTICE file for GPLv3 Section 7 terms that apply to this code.
  *
+ * Recon-verified against Proton VPN 5.21.57.0 (Play, installed build):
+ *   Lcom/protonvpn/android/settings/data/LocalUserSettings;->getRandomizedNat()Z
+ *   -> Lil/j3;->invokeSuspend (single call site, smali line 2622)
+ *   row:  invoke-direct/range {v24..v30}, Lil/n2;-><init>(Ljava/io/Serializable;ZILil/d;Ljava/lang/Integer;I)V
+ *         v26 = Z (restricted) param, fed by move/from16 v26, v13 three instructions before the ctor.
+ *   v26 is dead after the ctor (verified: zero references past smali line 2740),
+ *   so the move/from16 is replaced in-place with const/4 v26, 0x0.
+ *   Title const 0x7f1305e2 + description const 0x7f1305da uniquely pin this n2 call.
  */
 
 package app.morphe.patches.protonvpn.nat
 
 import app.morphe.patcher.Fingerprint
-import app.morphe.patcher.extensions.InstructionExtensions.addInstruction
 import app.morphe.patcher.extensions.InstructionExtensions.instructions
+import app.morphe.patcher.extensions.InstructionExtensions.replaceInstruction
 import app.morphe.patcher.methodCall
 import app.morphe.patcher.patch.PatchException
 import com.android.tools.smali.dexlib2.Opcode
-import com.android.tools.smali.dexlib2.iface.instruction.FiveRegisterInstruction
-import com.android.tools.smali.dexlib2.iface.instruction.Instruction
 import com.android.tools.smali.dexlib2.iface.instruction.OneRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.ReferenceInstruction
 import com.android.tools.smali.dexlib2.iface.instruction.RegisterRangeInstruction
-import com.android.tools.smali.dexlib2.iface.instruction.TwoRegisterInstruction
 import com.android.tools.smali.dexlib2.iface.reference.MethodReference
 
 private const val J3 = "Lil/j3;"
 private const val LOCAL_USER_SETTINGS = "Lcom/protonvpn/android/settings/data/LocalUserSettings;"
+private const val N2_INIT = "Lil/n2;-><init>"
 
 private object NatTypeGateFingerprint : Fingerprint(
     definingClass = J3,
@@ -40,57 +46,49 @@ internal fun unlockNatType() {
     val instructions = method.instructions.toList()
     val gate = match.instructionMatches.first().index
 
-    val state = instructions[gate + 1] as OneRegisterInstruction
-    val ifEqz = instructions[gate + 2]
-    val ifNez = instructions[gate + 3] as OneRegisterInstruction
-    val valid = state.opcode == Opcode.MOVE_RESULT &&
-        ifEqz.opcode == Opcode.IF_EQZ &&
-        ifNez.opcode == Opcode.IF_NEZ &&
-        state.registerA == (ifEqz as OneRegisterInstruction).registerA
-    if (!valid) {
-        throw PatchException("ProtonVPN: NAT type gate pattern drifted in $J3")
-    }
-    val flag = ifNez.registerA
-
+    // Walk forward from getRandomizedNat to the first n2 ctor.
     var ctorIndex = -1
     for (i in gate until instructions.size) {
         val ins = instructions[i]
         if (ins.opcode != Opcode.INVOKE_DIRECT_RANGE) continue
         val ref = (ins as? ReferenceInstruction)?.reference as? MethodReference ?: continue
-        if ("${ref.definingClass}->${ref.name}" == "Lil/n2;-><init>") {
+        if ("${ref.definingClass}->${ref.name}" == N2_INIT) {
             ctorIndex = i
             break
         }
     }
-
     if (ctorIndex < 0) {
         throw PatchException("ProtonVPN: no Lil/n2;-><init> after the NAT gate in $J3")
     }
 
-    val window = instructions.subList(gate, ctorIndex + 1)
-    val stash = ((flag + 1)..44).first { candidate ->
-        window.none { ins -> usesRegister(ins, candidate) }
+    // n2 signature: (this, Serializable, Z, I, Lil/d;, Integer, I) = 7 regs.
+    // Z (restricted) param is at offset 2 from startRegister.
+    val ctor = instructions[ctorIndex] as RegisterRangeInstruction
+    val zReg = ctor.startRegister + 2
+
+    // Walk backwards from the ctor to find the last write to zReg.
+    var assignIndex = -1
+    for (i in (ctorIndex - 1) downTo gate) {
+        val ins = instructions[i]
+        if (ins is OneRegisterInstruction && ins.registerA == zReg) {
+            assignIndex = i
+            break
+        }
+    }
+    if (assignIndex < 0) {
+        throw PatchException("ProtonVPN: no assignment to v$zReg before the NAT n2 ctor in $J3")
     }
 
-    method.addInstruction(ctorIndex + 1, "move/from16 v$flag, v$stash")
-    method.addInstruction(gate, "const/16 v$flag, 0x0")
-    method.addInstruction(gate, "move/from16 v$stash, v$flag")
+    // Verify it's the expected move/from16 (restricted flag copy).
+    val assign = instructions[assignIndex]
+    if (assign.opcode != Opcode.MOVE_FROM16) {
+        throw PatchException(
+            "ProtonVPN: expected MOVE_FROM16 at $assignIndex for v$zReg, found ${assign.opcode}",
+        )
+    }
 
-    println("[protonvpn] nat: unlocked (gate@$gate, flag=v$flag, stash=v$stash)")
-}
+    // v26 is dead after the ctor — replace in-place, no stash needed.
+    method.replaceInstruction(assignIndex, "const/16 v$zReg, 0x0")
 
-private fun usesRegister(ins: Instruction, reg: Int): Boolean = when (ins) {
-    is OneRegisterInstruction -> ins.registerA == reg
-    is TwoRegisterInstruction -> ins.registerA == reg || ins.registerB == reg
-    is FiveRegisterInstruction -> reg in listOf(
-        ins.registerC,
-        ins.registerD,
-        ins.registerE,
-        ins.registerF,
-        ins.registerG,
-    ).take(ins.registerCount)
-    is RegisterRangeInstruction ->
-        ins.registerCount > 0 &&
-            reg in ins.startRegister until (ins.startRegister + ins.registerCount)
-    else -> false
+    println("[protonvpn] nat: unlocked (ctor@$ctorIndex, zReg=v$zReg, replaced@$assignIndex)")
 }
