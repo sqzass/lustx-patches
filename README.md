@@ -40,7 +40,9 @@ Below will contain apps that I plan on trying to get patched. If empty, you can 
 
 #### huge shoutout to Venus, i will probably end up forking their work (if license allows). code will credit where due.
 
-still deciding. Asscord? Lustcord? Xcord? Luxcord?
+- Lustcord Rebrand
+- Remove some patches that i dont really want
+- add in patches from doiksub/meoew.com
 
 ### MacroDroid
 
